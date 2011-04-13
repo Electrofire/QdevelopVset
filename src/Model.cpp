@@ -57,7 +57,7 @@ void Model::render() {
   }
   return;
 }
-
+/**
 void Model::TkCheckAbort(vtkRenderWindow *renWin){
   vtkRenderWindow *tempWin = renWin;
   int foo =renWin->GetEventPending();
@@ -67,7 +67,7 @@ void Model::TkCheckAbort(vtkRenderWindow *renWin){
     }
   } 
 }
-
+**/
 void Model::renderVel() {
   // This is a simple volume rendering example that
   // uses a vtkVolumeRayCast mapper
@@ -77,6 +77,7 @@ void Model::renderVel() {
 
   // Create the standard renderer, render window
   // and interactor
+  /**
   vtkRenderer *ren1 = vtkRenderer::New();
   vtkRenderWindow *renWin = vtkRenderWindow::New();
   renWin->AddRenderer(ren1);
@@ -175,7 +176,7 @@ void Model::renderVel() {
   writer->SetInputConnection(renderLarge->GetOutputPort());
   writer->SetFileName("vel3d.jpg");
   writer->Write();
-  */
+
 
   TkCheckAbort(renWin);
   //renWin->AddObserver("AbortCheckEvent", vtkCommand::AbortCheckEvent ,1.0f);
@@ -183,7 +184,7 @@ void Model::renderVel() {
   iren->Initialize();
   iren->Start();
 
-
+**/
   //wm->withdraw(.);
 }
 
@@ -406,6 +407,7 @@ void Model::renderDusum() {
 
   // Create the standard renderer, render window
   // and interactor
+  /*
   vtkRenderer *ren1 = vtkRenderer::New();
   vtkRenderWindow *renWin = vtkRenderWindow::New();
   renWin->AddRenderer(ren1);
@@ -509,14 +511,14 @@ void Model::renderDusum() {
   writer->SetInputConnection(renderLarge->GetOutputPort());
   writer->SetFileName("vel3d.jpg");
   writer->Write();
-  */
+
 
   TkCheckAbort(renWin);
   //renWin->AddObserver("AbortCheckEvent", vtkCommand::AbortCheckEvent ,1.0f);
   //iren->AddObserver(UserEvent {wm deiconify .vtkInteract});
   iren->Initialize();
   iren->Start();
-
+*/
 
   //wm->withdraw(.);
 }
@@ -530,6 +532,7 @@ void Model::renderCoverage() {
 
   // Create the standard renderer, render window
   // and interactor
+  /*
   vtkRenderer *ren1 = vtkRenderer::New();
   vtkRenderWindow *renWin = vtkRenderWindow::New();
   renWin->AddRenderer(ren1);
@@ -630,11 +633,11 @@ void Model::renderCoverage() {
   writer->Write();
   */
 
-  TkCheckAbort(renWin);
+  /*TkCheckAbort(renWin);
   //renWin->AddObserver("AbortCheckEvent", vtkCommand::AbortCheckEvent ,1.0f);
   //iren->AddObserver(UserEvent {wm deiconify .vtkInteract});
   iren->Initialize();
-  iren->Start();
+  iren->Start();*/
 
 
   //wm->withdraw(.);

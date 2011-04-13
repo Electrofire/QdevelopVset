@@ -12,6 +12,7 @@
 #include <fstream>
 #include <string>
 #include "Experiment.h"
+/**
 #include "vtkActor.h"
 #include "vtkColorTransferFunction.h"
 #include "vtkContourFilter.h"
@@ -30,7 +31,7 @@
 #include "vtkVolumeRayCastCompositeFunction.h"
 #include "vtkVolumeRayCastMapper.h"
 #include "vtkCommand.h"
-
+**/
 using namespace std;
 
 class Experiment;
@@ -55,7 +56,7 @@ protected:
    // virtual int read() {};
     string path;
 private:
-  void TkCheckAbort(vtkRenderWindow *renWin);
+  //void TkCheckAbort(vtkRenderWindow *renWin);
   void renderVel();
   void renderTime();
   void renderTimeWOVol();
