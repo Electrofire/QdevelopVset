@@ -179,7 +179,7 @@ void Experiment::create_models(vector<string> files, int model_type) {
                 model = new CoverageModel(files.at(i), this);
                 break;
             case VELOCITY_MODEL:
-                model = new VelocityModel(files.at(i), this);
+                model = new VelocityModel(files.at(i), this);              
                 break;
             case TIME_MODEL:
                 model = new TimeModel(files.at(i), this);
@@ -194,7 +194,7 @@ void Experiment::create_models(vector<string> files, int model_type) {
                 model = new Model(files.at(i), this);
                 break;
         }
-        models.push_back(*model);
+        models.push_back(model);
     }
 
 }
@@ -203,7 +203,7 @@ string Experiment::getprojectName() {
     return project_name;
 }
 
-vector<Model> Experiment::getModels(){
-   	return models;
+vector<Model*> Experiment::getModels(){
+        return models;
    	
   	}

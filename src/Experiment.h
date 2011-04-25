@@ -32,12 +32,12 @@ public:
     bool close_model(Model model);
     bool open_model(Model model);
     string getprojectName();
-    vector<Model> getModels();
+    vector<Model*> getModels();
     /* END METHODS*/
     
     /* ATTRIBUTES */
     vector<Model> open_models;
-    vector<Model> models;
+    vector<Model*> models;
 
     string project_name;
     string project_path;

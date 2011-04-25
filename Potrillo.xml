@@ -5,13 +5,13 @@ Seismic Tomography Work Unit-->
 <workspace active="T" modeltype="1">
   <username>crchacon</username>
   <projectname>Potrillo</projectname>
-  <projectpath>/home/ahlatimer/Desktop/Mac/Home/devs/school/vset/</projectpath>
+  <projectpath>/home/ganondorf/vsetgit/QdevelopVset/</projectpath>
   <iterations>6</iterations>
   <server>geon.utep.edu</server>
   <date>Wed Aug 11 01:05:58 MDT 2010</date>
   <!--Vel 1d - onedimensional model-->
   <vel1d velSelect="0">
-    <file>/home/ahlatimer/Desktop/Parallels Shared Folders/Home/devs/school/vset/vzero.par</file>
+    <file>/home/ganondorf/vsetgit/QdevelopVset/vzero.par</file>
     <h>1.0</h>
     <x0>0.0</x0>
     <y0>0.0</y0>
@@ -61,16 +61,16 @@ Seismic Tomography Work Unit-->
       <spPosition floatSr="true" xyz0="1.3 2.5 0.0" xyzsrc="0.0 0.0 7.7"/>
     </spPositionTable>
     <stattable loadParamsFromFile="false">
-      <file numstat="0">/home/caca/vsetgit/QdevelopVset/1.stat</file>
-      <file numstat="0">/home/caca/vsetgit/QdevelopVset/2.stat</file>
-      <file numstat="0">/home/caca/vsetgit/QdevelopVset/3.stat</file>
-      <file numstat="0">/home/caca/vsetgit/QdevelopVset/4.stat</file>
+      <file numstat="0">/home/ganondorf/vsetgit/QdevelopVset/1.stat</file>
+      <file numstat="0">/home/ganondorf/vsetgit/QdevelopVset/2.stat</file>
+      <file numstat="0">/home/ganondorf/vsetgit/QdevelopVset/3.stat</file>
+      <file numstat="0">/home/ganondorf/vsetgit/QdevelopVset/4.stat</file>
     </stattable>
     <picktable loadParamsFromFile="false">
-      <file vred="0.0">/home/caca/vsetgit/QdevelopVset/1.pix</file>
-      <file vred="0.0">/home/caca/vsetgit/QdevelopVset/2.pix</file>
-      <file vred="0.0">/home/caca/vsetgit/QdevelopVset/3.pix</file>
-      <file vred="0.0">/home/caca/vsetgit/QdevelopVset/4.pix</file>
+      <file vred="0.0">/home/ganondorf/vsetgit/QdevelopVset/1.pix</file>
+      <file vred="0.0">/home/ganondorf/vsetgit/QdevelopVset/2.pix</file>
+      <file vred="0.0">/home/ganondorf/vsetgit/QdevelopVset/3.pix</file>
+      <file vred="0.0">/home/ganondorf/vsetgit/QdevelopVset/4.pix</file>
     </picktable>
   </cover>
   <smoothing nsmooth="2">

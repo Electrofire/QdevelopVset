@@ -11,7 +11,7 @@ OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build 
 INCLUDEPATH += . src build build/vtk
-LIBS += -L/home/ganondorf/vsetgit/QdevelopVset/build/vtk/bin -lvtkRendering -lvtkIO -lvtkFiltering -lvtkGraphics -lvtkVolumeRendering
+LIBS += -L./build/vtk/bin -lvtkRendering -lvtkIO -lvtkFiltering -lvtkGraphics -lvtkVolumeRendering -lQVTK
 
 
 # Input

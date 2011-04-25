@@ -30,7 +30,7 @@
 #include "vtkVolumeProperty.h"
 #include "vtkVolumeRayCastCompositeFunction.h"
 #include "vtkVolumeRayCastMapper.h"
-#include "vtkCommand.h"
+ #include "vtkCommand.h"
 
 using namespace std;
 
@@ -103,14 +103,6 @@ public:
 private:
 
 };
-/**
-class SmootherModel: public Model {
-public:
-    SmootherModel(string p, Experiment *exp);
-    virtual ~SmootherModel();
-private:
-
-};**/
 
 #endif	/* MODEL_H */
 

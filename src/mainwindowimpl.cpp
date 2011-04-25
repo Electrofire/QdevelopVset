@@ -277,8 +277,8 @@ treeWidget->resizeColumnToContents(3);
 
 
 void MainWindowImpl::openModel(QTreeWidgetItem *item) {	
-  Experiment *experiment = new Experiment("/home/ahlatimer/vset");
-  std::vector<Model> models = experiment->getModels();
+  vector<Experiment*>experiment = vswork.getList_of_experiments();
+  std::vector<Model*> models = experiment[0]->getModels();
   
   std::string model_type = "";
   std::string iteration = "";
@@ -297,10 +297,10 @@ void MainWindowImpl::openModel(QTreeWidgetItem *item) {
   }
   
   for(int i = 0; i < models.size(); i++) {
-    iteration = intToString(models[i].getIteration());
-    step = intToString(models[i].getStep());
-    if(models[i].getName() == model_type && item->text(1) == QString::fromStdString(iteration) && item->text(2) == QString::fromStdString(step)) {
-      models[i].render();
+    iteration = intToString(models[i]->getIteration());
+    step = intToString(models[i]->getStep());
+    if(models[i]->getName() == model_type && item->text(1) == QString::fromStdString(iteration) && item->text(2) == QString::fromStdString(step)) {
+      models[i]->render();
       return;
     }
   }
