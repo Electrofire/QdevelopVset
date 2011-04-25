@@ -10,11 +10,9 @@ QT = gui core
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build 
-INCLUDEPATH += . src build /usr/local/include/vtk-5.6
-DESTDIR = bin
-OBJECTS_DIR = build
-MOC_DIR = build
-UI_DIR = build
+INCLUDEPATH += . src build build/vtk
+LIBS += -L/home/ganondorf/vsetgit/QdevelopVset/build/vtk/bin -lvtkRendering -lvtkIO -lvtkFiltering -lvtkGraphics -lvtkVolumeRendering
+
 
 # Input
 HEADERS += src/animatorwindow.h \
