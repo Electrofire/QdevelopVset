@@ -25,8 +25,10 @@ HEADERS += src/animatorwindow.h \
            src/RenderWindow.h \
            src/ShotPoint.h \
            src/Visualization.h \
-           src/Workspace.h
-FORMS += ui/animatorwindow.ui ui/mainwindow.ui
+           src/Workspace.h \
+           src/modelwindow.h
+FORMS += ui/animatorwindow.ui ui/mainwindow.ui \
+         ui/modelwindow.ui
 SOURCES += src/animatorwindow.cpp \
            src/CoverageModel.cpp \
            src/Experiment.cpp \
@@ -41,4 +43,5 @@ SOURCES += src/animatorwindow.cpp \
            src/TimeModel.cpp \
            src/VelocityModel.cpp \
            src/Visualization.cpp \
-           src/Workspace.cpp
+           src/Workspace.cpp \
+           src/modelwindow.cpp

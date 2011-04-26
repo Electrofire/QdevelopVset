@@ -27,6 +27,7 @@ public:
     vector<Experiment*> getList_of_experiments() const;
     void remove_experiment(int index);
     void setTreeWidget(QTreeWidget *TreeWidget);
+    int searchExperiment(string name);
 
     //Manage experiments
     void add_experiment(Experiment*);

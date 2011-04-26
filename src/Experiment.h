@@ -33,6 +33,7 @@ public:
     bool open_model(Model model);
     string getprojectName();
     vector<Model*> getModels();
+    int searchModel(string path);
     /* END METHODS*/
     
     /* ATTRIBUTES */

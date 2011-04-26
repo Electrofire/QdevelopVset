@@ -37,7 +37,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
     connect(actionRotate, SIGNAL(triggered()), this, SLOT(doRotate()));
 
     //connect vel
-    connect(treeWidget, SIGNAL(itemDoubleClicked ( QTreeWidgetItem*, int ) ), this, SLOT(openModel(QTreeWidgetItem*)));
+    connect(treeWidget, SIGNAL(itemDoubleClicked ( QTreeWidgetItem*, int ) ), this, SLOT(openModel(QTreeWidgetItem*, int)));
 
     //vswork connect widgets to references
     vswork.setTree(treeWidget);
@@ -55,18 +55,18 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 //Opens the file dialog and
 //gets a string to the XML file
 void MainWindowImpl::openSelect()
-{	
-	//Open Select XML Dialog and filter the files
-	//by extension
-	QString fileName;
-	fileName = QFileDialog::getOpenFileName(
+{
+        //Open Select XML Dialog and filter the files
+        //by extension
+        QString fileName;
+        fileName = QFileDialog::getOpenFileName(
         this,
         "Select XML to load Experiment",
         "/",
         tr("XML (*.xml);; All files (*.*)")
-	);
-	
-	//add experiment to the vector of experiments in the manager
+        );
+
+        //add experiment to the vector of experiments in the manager
         //expMan.add(fileName.toStdString(), treeWidget);
 
         vswork.add_experiment(fileName.toStdString());
@@ -180,95 +180,95 @@ void MainWindowImpl::refreshTreeItems()
 /**
     QTreeWidgetItem *item = new QTreeWidgetItem(treeWidget);
      item->setText(0, tr("Potrillo"));
-     
+
 QTreeWidgetItem *covItem = new QTreeWidgetItem(item);
      covItem->setText(0, tr("Coverage"));
-     
-     
-	QTreeWidgetItem *cov1Item = new QTreeWidgetItem(covItem);
-	     cov1Item->setText(0, tr("Coverage"));
-		  cov1Item->setText(1, tr("1"));
-	     cov1Item->setText(2, tr("1"));
-	     
-	     	QTreeWidgetItem *cov2Item = new QTreeWidgetItem(covItem);
-	     cov2Item->setText(0, tr("Coverage"));
-		  cov2Item->setText(1, tr("1"));
-	     cov2Item->setText(2, tr("2"));
-	     
-	     	QTreeWidgetItem *cov3Item = new QTreeWidgetItem(covItem);
-	     cov3Item->setText(0, tr("Coverage"));
-		  cov3Item->setText(1, tr("1"));
-	     cov3Item->setText(2, tr("3"));
- 
+
+
+        QTreeWidgetItem *cov1Item = new QTreeWidgetItem(covItem);
+             cov1Item->setText(0, tr("Coverage"));
+                  cov1Item->setText(1, tr("1"));
+             cov1Item->setText(2, tr("1"));
+
+                QTreeWidgetItem *cov2Item = new QTreeWidgetItem(covItem);
+             cov2Item->setText(0, tr("Coverage"));
+                  cov2Item->setText(1, tr("1"));
+             cov2Item->setText(2, tr("2"));
+
+                QTreeWidgetItem *cov3Item = new QTreeWidgetItem(covItem);
+             cov3Item->setText(0, tr("Coverage"));
+                  cov3Item->setText(1, tr("1"));
+             cov3Item->setText(2, tr("3"));
+
   QTreeWidgetItem *timeItem = new QTreeWidgetItem(item);
      timeItem->setText(0, tr("Time"));
-     
+
      QTreeWidgetItem *time1Item = new QTreeWidgetItem(timeItem);
-	     time1Item->setText(0, tr("Time"));
-		  time1Item->setText(1, tr("1"));
-	     time1Item->setText(2, tr("1"));
-	     
-	     	QTreeWidgetItem *time2Item = new QTreeWidgetItem(timeItem);
-	     time2Item->setText(0, tr("Time"));
-		  time2Item->setText(1, tr("1"));
-	     time2Item->setText(2, tr("2"));
-	     
-	     	QTreeWidgetItem *time3Item = new QTreeWidgetItem(timeItem);
-	     time3Item->setText(0, tr("Time"));
-		  time3Item->setText(1, tr("1"));
-	     time3Item->setText(2, tr("3"));
-     
-     	
-     
-     
+             time1Item->setText(0, tr("Time"));
+                  time1Item->setText(1, tr("1"));
+             time1Item->setText(2, tr("1"));
+
+                QTreeWidgetItem *time2Item = new QTreeWidgetItem(timeItem);
+             time2Item->setText(0, tr("Time"));
+                  time2Item->setText(1, tr("1"));
+             time2Item->setText(2, tr("2"));
+
+                QTreeWidgetItem *time3Item = new QTreeWidgetItem(timeItem);
+             time3Item->setText(0, tr("Time"));
+                  time3Item->setText(1, tr("1"));
+             time3Item->setText(2, tr("3"));
+
+
+
+
   QTreeWidgetItem *tomoItem = new QTreeWidgetItem(item);
-     tomoItem->setText(0, tr("Smoother 1")); 
+     tomoItem->setText(0, tr("Smoother 1"));
 
       QTreeWidgetItem *tomo1Item = new QTreeWidgetItem(tomoItem);
-	     tomo1Item->setText(0, tr("Tomo"));
-		  tomo1Item->setText(1, tr("1"));
-	     tomo1Item->setText(2, tr("1"));
-	     
-  
+             tomo1Item->setText(0, tr("Tomo"));
+                  tomo1Item->setText(1, tr("1"));
+             tomo1Item->setText(2, tr("1"));
+
+
   QTreeWidgetItem *smItem = new QTreeWidgetItem(item);
      smItem->setText(0, tr("Smoother 2"));
-     
+
            QTreeWidgetItem *sm1Item = new QTreeWidgetItem(smItem);
-	     sm1Item->setText(0, tr("MVAF"));
-		  sm1Item->setText(1, tr("1"));
-	     sm1Item->setText(2, tr("1"));
-     
-     
-      
+             sm1Item->setText(0, tr("MVAF"));
+                  sm1Item->setText(1, tr("1"));
+             sm1Item->setText(2, tr("1"));
+
+
+
    QTreeWidgetItem *duItem = new QTreeWidgetItem(item);
-     duItem->setText(0, tr("Du"));   
-     
+     duItem->setText(0, tr("Du"));
+
       QTreeWidgetItem *du1Item = new QTreeWidgetItem(duItem);
-	     du1Item->setText(0, tr("Du"));
-		  du1Item->setText(1, tr("1"));
-	     du1Item->setText(2, tr("1"));     
-     
-     
+             du1Item->setText(0, tr("Du"));
+                  du1Item->setText(1, tr("1"));
+             du1Item->setText(2, tr("1"));
+
+
  QTreeWidgetItem *velItem = new QTreeWidgetItem(item);
      velItem->setText(0, tr("Velocity"));
-     
-           
+
+
            vel1Item = new QTreeWidgetItem(velItem);
-	     vel1Item->setText(0, tr("Vel"));
-		  vel1Item->setText(1, tr("1"));
-	     vel1Item->setText(2, tr("1")); 
-	     
-	     
-    
-	     
+             vel1Item->setText(0, tr("Vel"));
+                  vel1Item->setText(1, tr("1"));
+             vel1Item->setText(2, tr("1"));
+
+
+
+
 
 QTreeWidgetItem *finalItem = new QTreeWidgetItem(item);
-     finalItem->setText(0, tr("Final Models"));  
-     
+     finalItem->setText(0, tr("Final Models"));
+
            QTreeWidgetItem *covfItem = new QTreeWidgetItem(finalItem);
-	     covfItem->setText(0, tr("Coverage"));
-		  
-     
+             covfItem->setText(0, tr("Coverage"));
+
+
 treeWidget->resizeColumnToContents(1);
 treeWidget->resizeColumnToContents(2);
 treeWidget->resizeColumnToContents(3);
@@ -276,34 +276,16 @@ treeWidget->resizeColumnToContents(3);
 }
 
 
-void MainWindowImpl::openModel(QTreeWidgetItem *item) {	
-  vector<Experiment*>experiment = vswork.getList_of_experiments();
-  std::vector<Model*> models = experiment[0]->getModels();
-  
-  std::string model_type = "";
-  std::string iteration = "";
-  std::string step = "";
-  
-  if(item->text(0) == "Coverage") {
-    model_type = "icov";
-  } else if(item->text(0) == "Time") {
-    model_type = "time";
-  } else if(item->text(0) == "Vel Perturbation") {
-    model_type = "dusum";
-  } else if(item->text(0) == "Smoother 1") {
-    model_type = "velaa";
-  } else if(item->text(9) == "Smoother 2") {
-    model_type = "dvaa";
-  }
-  
-  for(int i = 0; i < models.size(); i++) {
-    iteration = intToString(models[i]->getIteration());
-    step = intToString(models[i]->getStep());
-    if(models[i]->getName() == model_type && item->text(1) == QString::fromStdString(iteration) && item->text(2) == QString::fromStdString(step)) {
-      models[i]->render();
-      return;
-    }
-  }
+void MainWindowImpl::openModel(QTreeWidgetItem *item, int index) {
+
+  string modelInfo = item->whatsThis(0).toStdString();
+  int next = modelInfo.rfind(" ");
+  string ExperimentName = modelInfo.substr(0, next);
+  string ModelName = modelInfo.substr(next+1, modelInfo.length());
+
+  Model* model = vswork.getModel(ExperimentName, ModelName);
+  model->render();
+
 }
 
 std::string MainWindowImpl::intToString(int i)

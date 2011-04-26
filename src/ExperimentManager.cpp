@@ -57,6 +57,7 @@ void ExperimentManager::add(string expStr) {
         if(models[i]->getName()=="icov"){
             QTreeWidgetItem *covchild = new QTreeWidgetItem(covItem);
             covchild->setText(0, QObject::tr("Coverage"));
+            covchild->setWhatsThis(0, projectName+" "+QString::fromStdString(models[i]->getPath()));
             iter =QString::fromStdString(convertInt(models[i]->getIteration()));
             covchild->setText(1, iter);
             stp= QString::fromStdString(convertInt(models[i]->getStep()));
@@ -67,6 +68,7 @@ void ExperimentManager::add(string expStr) {
         else if(models[i]->getName()=="time"){
             QTreeWidgetItem *timechild = new QTreeWidgetItem(timeItem);
             timechild->setText(0, QObject::tr("Time"));
+            timechild->setWhatsThis(0, projectName+" "+QString::fromStdString(models[i]->getPath()));
             iter =QString::fromStdString(convertInt(models[i]->getIteration()));
             timechild->setText(1, iter);
             stp= QString::fromStdString(convertInt(models[i]->getStep()));
@@ -77,6 +79,7 @@ void ExperimentManager::add(string expStr) {
         else if(models[i]->getName()=="dusum"){
             QTreeWidgetItem *duchild = new QTreeWidgetItem(duItem);
             duchild->setText(0, QObject::tr("Vel Perturbation"));
+            duchild->setWhatsThis(0, projectName+" "+QString::fromStdString(models[i]->getPath()));
             iter =QString::fromStdString(convertInt(models[i]->getIteration()));
             duchild->setText(1, iter);
             stp= QString::fromStdString(convertInt(models[i]->getStep()));
@@ -87,6 +90,7 @@ void ExperimentManager::add(string expStr) {
         else if(models[i]->getName()=="velaa"){
             QTreeWidgetItem *s1child = new QTreeWidgetItem(s1Item);
             s1child->setText(0, QObject::tr("Smoother 1"));
+            s1child->setWhatsThis(0, projectName+" "+QString::fromStdString(models[i]->getPath()));
             iter =QString::fromStdString(convertInt(models[i]->getIteration()));
             s1child->setText(1, iter);
             stp= QString::fromStdString(convertInt(models[i]->getStep()));
@@ -97,6 +101,7 @@ void ExperimentManager::add(string expStr) {
         else if(models[i]->getName()=="dvaa"){
             QTreeWidgetItem *s2child = new QTreeWidgetItem(s2Item);
             s2child->setText(0, QObject::tr("Smoother 2"));
+            s2child->setWhatsThis(0, projectName+" "+QString::fromStdString(models[i]->getPath()));
             iter =QString::fromStdString(convertInt(models[i]->getIteration()));
             s2child->setText(1, iter);
             stp= QString::fromStdString(convertInt(models[i]->getStep()));
@@ -161,6 +166,15 @@ void ExperimentManager::remove_experiment(int index)
 vector<Experiment*> ExperimentManager::getList_of_experiments() const
 {
   return list_of_experiments_;
+}
+
+int ExperimentManager::searchExperiment(string name){
+
+    for(int i=0; i< list_of_experiments_.size(); i++){
+        if(list_of_experiments_[i]->getprojectName().compare(name)==0)
+            return i;
+    }
+    return -1; //error?
 }
 
 string ExperimentManager::convertInt(int number)

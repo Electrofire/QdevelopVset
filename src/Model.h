@@ -12,6 +12,10 @@
 #include <fstream>
 #include <string>
 #include "Experiment.h"
+#include <QVTKWidget.h>
+#include <vtkSmartPointer.h>
+#include "modelwindow.h"
+
 
 #include "vtkActor.h"
 #include "vtkColorTransferFunction.h"
@@ -30,7 +34,7 @@
 #include "vtkVolumeProperty.h"
 #include "vtkVolumeRayCastCompositeFunction.h"
 #include "vtkVolumeRayCastMapper.h"
- #include "vtkCommand.h"
+#include "vtkCommand.h"
 
 using namespace std;
 
@@ -44,6 +48,7 @@ public:
     virtual ~Model();
     int getStep();
     int getIteration();
+    string getPath(){return path;}
     string getName();
     void render();
     //virtual int draw() {};

@@ -204,6 +204,15 @@ string Experiment::getprojectName() {
 }
 
 vector<Model*> Experiment::getModels(){
-        return models;
+    return models;
    	
-  	}
+}
+
+int Experiment::searchModel(string path){
+
+    for(int i=0; i< models.size(); i++){
+        if(models[i]->getPath().compare(path)==0)
+            return i;
+    }
+    return -1; //error?
+}

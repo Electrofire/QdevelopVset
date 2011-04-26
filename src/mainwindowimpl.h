@@ -43,7 +43,7 @@ private slots:
         void saveFile();
         void OpenAnimatorWindow();
 	void refreshTreeItems();
-        void openModel(QTreeWidgetItem*);
+        void openModel(QTreeWidgetItem* item, int index);
         void doSlice();
         void doZoom();
         void doPan();
