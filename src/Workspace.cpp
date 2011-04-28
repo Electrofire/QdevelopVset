@@ -102,6 +102,7 @@ void Workspace::setTree(QTreeWidget *TreeWidget){
 	expMan.setTreeWidget(TreeWidget);
 }
 
+//Search ModelPath in ExperimentName and return a model
 Model* Workspace::getModel(string experimentName, string ModelPath){
 
     int exp = expMan.searchExperiment(experimentName);

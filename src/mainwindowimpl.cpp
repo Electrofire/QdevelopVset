@@ -284,7 +284,9 @@ void MainWindowImpl::openModel(QTreeWidgetItem *item, int index) {
   string ModelName = modelInfo.substr(next+1, modelInfo.length());
 
   Model* model = vswork.getModel(ExperimentName, ModelName);
-  model->render();
+  Visualization* vis = new Visualization();
+  vswork.add_visualization(vis);
+  //vis->render_model();
 
 }
 

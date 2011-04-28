@@ -19,22 +19,29 @@
  *  		- camera(zoom, position, etc)
  *  		- color scale
  *
- *		Last update: 11:13 am / 25 / March / 2011
+ *		Last update: 4/26/2011
+ *      -added render_model(Model model), void TkCheckAbort(...)
  */
 
 #ifndef VISUALIZATION_H_
 #define VISUALIZATION_H_
 
+#include <iostream>
+#include "Model.h"
+using namespace std;
+
 class Visualization
 {
-	public:
-		Visualization();
-		virtual ~Visualization();
+        public:
+                Visualization();
+                virtual ~Visualization();
 
-		//TO-DO
-		//Method to combine the Model and the
-		//visualization data and generate the image
-		void generate_visualization();
+                //TO-DO
+                //Method to combine the Model and the
+                //visualization data and generate the image
+                void render_model(Model model);
+        private:
+        void TkCheckAbort(vtkRenderWindow *renWin);
 };
 
 #endif /* VISUALIZATION_H_ */
