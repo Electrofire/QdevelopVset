@@ -47,8 +47,8 @@ Visualization::~Visualization() {
         // TODO Auto-generated destructor stub
 }
 
-void Visualization::create_snapshot(vtkRenderWindow *vRW,vtkRenderer *ren1, const char *image_name) {
-        vtkRenderWindow *renWin = vRW;
+void Visualization::create_snapshot(vtkRenderer *ren1, const char *image_name) {
+
         vtkRenderLargeImage *renderLarge;
         renderLarge = vtkRenderLargeImage::New();
         renderLarge->SetInput(ren1);
@@ -76,7 +76,6 @@ void Visualization::TkCheckAbort(vtkRenderWindow *renWin){
 //or a type of velocity model supplied
 //If statements in code are there for the specific details needed for specific models
 void Visualization::render_model(Model* model) {
-    //string model_name = model.getName();
 
     // Create the standard renderer, render window
     // and interactor
@@ -157,17 +156,16 @@ void Visualization::render_model(Model* model) {
         contours->SetInput(reader->GetOutput());
     }
 
+    vtkPolyDataMapper *contMapper = vtkPolyDataMapper::New();
     //renderVel, renderTime
     if(model_name.compare(TIME) == 0 || model_name.compare(VEL1) == 0 || model_name.compare(VEL2) == 0 || model_name.compare(VEL3) == 0) {
        contours->GenerateValues(30, 0.0, 30315.0);
 
-       vtkPolyDataMapper *contMapper = vtkPolyDataMapper::New();
        contMapper->SetInput(contours->GetOutput());
-           contMapper->SetScalarRange(0.0, 30315.0);
+       contMapper->SetScalarRange(0.0, 30315.0);
      }
 
     //renderDusum
-    vtkPolyDataMapper *contMapper = vtkPolyDataMapper::New();
     if(model_name.compare(DUSUM) == 0) {
        contours->GenerateValues(40, 11950.0, 12025.0);
 
@@ -196,9 +194,10 @@ void Visualization::render_model(Model* model) {
     //##########################################################
     //The mapper / ray cast function know how to render the data
     //renderCoverage, renderDusum, renderVel
+    vtkVolumeRayCastMapper *volumeMapper = vtkVolumeRayCastMapper::New();
     if(model_name.compare(COV) == 0 || model_name.compare(DUSUM) == 0 || model_name.compare(VEL1) == 0 || model_name.compare(VEL2) == 0 || model_name.compare(VEL3) == 0) {
        vtkVolumeRayCastCompositeFunction *compositeFunction = vtkVolumeRayCastCompositeFunction::New();
-       vtkVolumeRayCastMapper *volumeMapper = vtkVolumeRayCastMapper::New();
+
        volumeMapper->SetVolumeRayCastFunction(compositeFunction);
        volumeMapper->SetInputConnection(reader->GetOutputPort());
 
@@ -207,17 +206,15 @@ void Visualization::render_model(Model* model) {
     }
 
     //renderTime
-    vtkSmartPointer<vtkVolumeRayCastMapper> volumeMapper = vtkSmartPointer<vtkVolumeRayCastMapper>::New();
-    if(model_name.compare(TIME) == 0) {
+
+    else{
+       vtkSmartPointer<vtkVolumeRayCastMapper> volumeMapper = vtkSmartPointer<vtkVolumeRayCastMapper>::New();
        vtkSmartPointer<vtkVolumeRayCastCompositeFunction> compositeFunction = vtkSmartPointer<vtkVolumeRayCastCompositeFunction>::New();
        volumeMapper->SetVolumeRayCastFunction(compositeFunction);
        volumeMapper->SetInputConnection(reader->GetOutputPort());
 
     //The volume holds the mapper and the property and
     //can be used to position/orient the volume
-
-    //vtkSmartPointer<vtkVolume> volume = vtkSmartPointer<vtkVolume>::New();
-    //vtkVolume *volume = vtkVolume::New();
     }
     vtkVolume *volume = vtkVolume::New();
 
@@ -233,28 +230,14 @@ void Visualization::render_model(Model* model) {
     ren1->AddActor(contActor);
     ren1->AddActor(outlineActor);
     renWin->SetSize(600, 600);
+
     renWin->Render();
 
-
-    // Magnify the image? How much?
-    vtkRenderLargeImage *renderLarge = vtkRenderLargeImage::New();
-    renderLarge->SetInput(ren1);
-    renderLarge->SetMagnification(1);
-
-    // We write out the image which causes the rendering to occur.
-    vtkTIFFWriter *writer = vtkTIFFWriter::New();
-    writer->SetInputConnection(renderLarge->GetOutputPort());
-    writer->SetFileName("vel3d.jpg");
-    writer->Write();
-
-
     TkCheckAbort(renWin);
-    //renWin->AddObserver("AbortCheckEvent", vtkCommand::AbortCheckEvent ,1.0f);
-    //iren->AddObserver(UserEvent {wm deiconify .vtkInteract});
+
     iren->Initialize();
     iren->Start();
+    //create_snapshot(ren1, "caca");
     //*********************************************************
 
-
-    //wm->withdraw(.);
 }

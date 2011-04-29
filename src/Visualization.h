@@ -40,9 +40,10 @@ class Visualization
                 //Method to combine the Model and the
                 //visualization data and generate the image
                 void render_model(Model* model);
-                void create_snapshot(vtkRenderWindow *vRW,vtkRenderer *ren1, const char *image_name);
+                void create_snapshot(vtkRenderer *ren1, const char *image_name);
         private:
-        void TkCheckAbort(vtkRenderWindow *renWin);
+                void TkCheckAbort(vtkRenderWindow *renWin);
+                Model * model;
 };
 
 #endif /* VISUALIZATION_H_ */
