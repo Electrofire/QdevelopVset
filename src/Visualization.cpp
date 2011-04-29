@@ -47,6 +47,19 @@ Visualization::~Visualization() {
         // TODO Auto-generated destructor stub
 }
 
+void Visualization::create_snapshot(vtkRenderWindow *vRW,vtkRenderer *ren1, const char *image_name) {
+        vtkRenderWindow *renWin = vRW;
+        vtkRenderLargeImage *renderLarge;
+        renderLarge = vtkRenderLargeImage::New();
+        renderLarge->SetInput(ren1);
+        renderLarge->SetMagnification(1);
+
+        vtkTIFFWriter *writer = vtkTIFFWriter::New();
+        writer->SetInputConnection(renderLarge->GetOutputPort());
+        writer->SetFileName(image_name);
+        writer->Write();
+}
+
 
 void Visualization::TkCheckAbort(vtkRenderWindow *renWin){
     vtkRenderWindow *tempWin = renWin;
@@ -62,12 +75,12 @@ void Visualization::TkCheckAbort(vtkRenderWindow *renWin){
 //Renders the supplied model, assuming it is a coverage, time, dusum,
 //or a type of velocity model supplied
 //If statements in code are there for the specific details needed for specific models
-void Visualization::render_model(Model model) {
+void Visualization::render_model(Model* model) {
     //string model_name = model.getName();
 
     // Create the standard renderer, render window
     // and interactor
-    /**
+    string model_name= model->getName();
     vtkRenderer *ren1 = vtkRenderer::New();
     vtkRenderWindow *renWin = vtkRenderWindow::New();
     renWin->AddRenderer(ren1);
@@ -76,7 +89,7 @@ void Visualization::render_model(Model model) {
 
     // Create the reader for the data
     vtkImageReader *reader = vtkImageReader::New();
-    reader->SetFileName(this->path.c_str());
+    reader->SetFileName(model->getPath().c_str());
     reader->SetDataScalarTypeToUnsignedShort();
     reader->SetDataByteOrderToLittleEndian();
     reader->SetFileDimensionality(3);
@@ -84,16 +97,16 @@ void Visualization::render_model(Model model) {
     reader->FileLowerLeftOn();
     //#reader->SetDataMask(0x7fff);
     //*********************************************************
-    if(model_name == COV || model_name == TIME || model_name == VEL1 || model_name == VEL2 || model_name == VEL3){
+    if(model_name.compare(COV) == 0 || model_name.compare(TIME)== 0 || model_name.compare(VEL1)== 0 || model_name.compare(VEL2)== 0 || model_name.compare(VEL3)== 0){
        reader->SetDataOrigin(0, 0, 0);
        reader->SetDataSpacing(1, 1, 1);
      }
 
-    if(model_name == TIME ||  model_name == VEL1 || model_name == VEL2 || model_name == VEL3) {
+    if(model_name.compare(TIME) == 0 ||  model_name.compare(VEL1) == 0 || model_name.compare(VEL2) == 0 || model_name.compare(VEL3)==0) {
        reader->SetDataExtent(0, 230, 0, 25, 0, 68);
     }
 
-    if(model_name == DUSUM || model_name = COV) {
+    if(model_name.compare(DUSUM) == 0 || model_name.compare(COV) == 0) {
        reader->SetDataExtent(0, 229, 0, 24, 0, 67);
     }
 
@@ -107,12 +120,12 @@ void Visualization::render_model(Model model) {
     vtkColorTransferFunction *colorTransferFunction = vtkColorTransferFunction::New();
     //*********************************************************
 
-    if(model_name = COV || model_name == TIME || model_name == VEL1 || model_name == VEL2 || model_name == VEL3) {
+    if(model_name.compare(COV)==0 || model_name.compare(TIME) == 0 || model_name.compare(VEL1) == 0 || model_name.compare(VEL2) == 0 || model_name.compare(VEL3) == 0) {
        colorTransferFunction->AddRGBPoint(0.0, 1.0, 0.0, 0.0);
        colorTransferFunction->AddRGBPoint(30315.0, 0.0, 0.0, 1.0);
     }
 
-    if(model_name == DUSUM) {
+    if(model_name.compare(DUSUM) == 0) {
         colorTransferFunction->AddRGBPoint(11950.0, 1.0, 0.0, 0.0);
         colorTransferFunction->AddRGBPoint(12025.0, 0.0, 0.0, 1.0);
     }
@@ -122,7 +135,7 @@ void Visualization::render_model(Model model) {
     vtkVolumeProperty *volumeProperty = vtkVolumeProperty::New();
     volumeProperty->SetColor(colorTransferFunction);
     volumeProperty->SetScalarOpacity(opacityTransferFunction);
-    if(model_name == COV) {
+    if(model_name.compare(COV) == 0) {
        colorTransferFunction->AddRGBPoint(0.0, 0.0, 0.0, 0.0);
        colorTransferFunction->AddRGBPoint(64.0, 1.0, 0.0, 0.0);
        colorTransferFunction->AddRGBPoint(128.0, 0.0, 0.0, 0.0);
@@ -139,13 +152,13 @@ void Visualization::render_model(Model model) {
     // specified.
 
     //renderVel, renderTime, renderDusum
-    if(model_name == TIME || model_name == DUSUM || model_name == VEL1 || model_name == VEL2 || model_name == VEL3) {
-       vtkContourFilter *contours = vtkContourFilter::New();
-           contours->SetInput(reader->GetOutput());
+    vtkContourFilter *contours = vtkContourFilter::New();
+    if(model_name.compare(TIME) == 0 || model_name.compare(DUSUM) == 0 || model_name.compare(VEL1) == 0 || model_name.compare(VEL2) == 0 || model_name.compare(VEL3) == 0) {
+        contours->SetInput(reader->GetOutput());
     }
 
     //renderVel, renderTime
-    if(model_name == TIME || model_name == VEL1 || model_name == VEL2 || model_name == VEL3) {
+    if(model_name.compare(TIME) == 0 || model_name.compare(VEL1) == 0 || model_name.compare(VEL2) == 0 || model_name.compare(VEL3) == 0) {
        contours->GenerateValues(30, 0.0, 30315.0);
 
        vtkPolyDataMapper *contMapper = vtkPolyDataMapper::New();
@@ -154,10 +167,10 @@ void Visualization::render_model(Model model) {
      }
 
     //renderDusum
-    if(model_name == DUSUM) {
+    vtkPolyDataMapper *contMapper = vtkPolyDataMapper::New();
+    if(model_name.compare(DUSUM) == 0) {
        contours->GenerateValues(40, 11950.0, 12025.0);
 
-       vtkPolyDataMapper *contMapper = vtkPolyDataMapper::New();
        contMapper->SetInput(contours->GetOutput());
        contMapper->SetScalarRange(11950.0, 12025.0);
     }
@@ -176,14 +189,14 @@ void Visualization::render_model(Model model) {
     outlineActor->SetMapper(outlineMapper);
     //*********************************************************
 
-    if(model_name == TIME) {
-       outlineActor->GetProperty()->SetColor(0, 0);
+    if(model_name.compare(TIME) == 0) {
+       (outlineActor->GetProperty())->SetColor(0, 0, 0);
     }
 
     //##########################################################
     //The mapper / ray cast function know how to render the data
     //renderCoverage, renderDusum, renderVel
-    if(model_name = COV || model_name == DUSUM || model_name == VEL1 || model_name == VEL2 || model_name == VEL3) {
+    if(model_name.compare(COV) == 0 || model_name.compare(DUSUM) == 0 || model_name.compare(VEL1) == 0 || model_name.compare(VEL2) == 0 || model_name.compare(VEL3) == 0) {
        vtkVolumeRayCastCompositeFunction *compositeFunction = vtkVolumeRayCastCompositeFunction::New();
        vtkVolumeRayCastMapper *volumeMapper = vtkVolumeRayCastMapper::New();
        volumeMapper->SetVolumeRayCastFunction(compositeFunction);
@@ -191,22 +204,22 @@ void Visualization::render_model(Model model) {
 
     // The volume holds the mapper and the property and
     // can be used to position/orient the volume
-    vtkVolume *volume = vtkVolume::New();
     }
 
     //renderTime
-    if(model_name == TIME) {
+    vtkSmartPointer<vtkVolumeRayCastMapper> volumeMapper = vtkSmartPointer<vtkVolumeRayCastMapper>::New();
+    if(model_name.compare(TIME) == 0) {
        vtkSmartPointer<vtkVolumeRayCastCompositeFunction> compositeFunction = vtkSmartPointer<vtkVolumeRayCastCompositeFunction>::New();
-       vtkSmartPointer<vtkVolumeRayCastMapper> volumeMapper = vtkSmartPointer<vtkVolumeRayCastMapper>::New();
        volumeMapper->SetVolumeRayCastFunction(compositeFunction);
        volumeMapper->SetInputConnection(reader->GetOutputPort());
 
     //The volume holds the mapper and the property and
     //can be used to position/orient the volume
 
-    vtkSmartPointer<vtkVolume> volume = vtkSmartPointer<vtkVolume>::New();
-    vtkVolume *volume = vtkVolume::New();
+    //vtkSmartPointer<vtkVolume> volume = vtkSmartPointer<vtkVolume>::New();
+    //vtkVolume *volume = vtkVolume::New();
     }
+    vtkVolume *volume = vtkVolume::New();
 
     //*********************************************************
     volume->SetMapper(volumeMapper);
@@ -222,7 +235,7 @@ void Visualization::render_model(Model model) {
     renWin->SetSize(600, 600);
     renWin->Render();
 
-    /*
+
     // Magnify the image? How much?
     vtkRenderLargeImage *renderLarge = vtkRenderLargeImage::New();
     renderLarge->SetInput(ren1);
@@ -241,7 +254,7 @@ void Visualization::render_model(Model model) {
     iren->Initialize();
     iren->Start();
     //*********************************************************
-    **/
+
 
     //wm->withdraw(.);
 }

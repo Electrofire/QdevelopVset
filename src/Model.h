@@ -18,10 +18,13 @@
 #include "vtkActor.h"
 #include "vtkColorTransferFunction.h"
 #include "vtkContourFilter.h"
+#include "vtkCamera.h"
 #include "vtkImageReader.h"
+#include "vtkInteractorStyleTrackballCamera.h"
 #include "vtkOutlineFilter.h"
 #include "vtkPiecewiseFunction.h"
 #include "vtkPolyDataMapper.h"
+#include "vtkProperty.h"
 #include "vtkRenderLargeImage.h"
 #include "vtkRenderWindow.h"
 #include "vtkRenderWindowInteractor.h"
@@ -32,6 +35,7 @@
 #include "vtkVolumeProperty.h"
 #include "vtkVolumeRayCastCompositeFunction.h"
 #include "vtkVolumeRayCastMapper.h"
+#include "vtkWindowToImageFilter.h"
 #include "vtkCommand.h"
 
 using namespace std;

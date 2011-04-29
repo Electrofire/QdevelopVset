@@ -39,7 +39,8 @@ class Visualization
                 //TO-DO
                 //Method to combine the Model and the
                 //visualization data and generate the image
-                void render_model(Model model);
+                void render_model(Model* model);
+                void create_snapshot(vtkRenderWindow *vRW,vtkRenderer *ren1, const char *image_name);
         private:
         void TkCheckAbort(vtkRenderWindow *renWin);
 };
