@@ -562,8 +562,11 @@ void Model::renderCoverage() {
   // Create the reader for the data
   vtkImageReader *reader = vtkImageReader::New();
   reader->SetFileName(this->path.c_str());
+  //cout<<"debug path" << path.c_str()<<endl;
   reader->SetDataScalarTypeToUnsignedShort();
+  //original code in littleEndian
   reader->SetDataByteOrderToLittleEndian();
+//reader->SetDataByteOrderToBigEndian(); 
   reader->SetFileDimensionality(3);
   reader->SetDataOrigin(0, 0, 0);
   reader->SetDataSpacing(1, 1, 1);
