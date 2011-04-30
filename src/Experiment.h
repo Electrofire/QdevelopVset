@@ -36,6 +36,7 @@ public:
     string getprojectName();
     vector<Model*> getModels();
     int searchModel(string path);
+    void parse_paths();
     /* END METHODS*/
     
     /* ATTRIBUTES */
@@ -57,7 +58,6 @@ public:
 private:
     /* METHODS */
     void read_xml();
-    void parse_paths();
     void create_models(vector<string> files, int model_type);
     void set_shot_points(pugi::xml_node node);
     

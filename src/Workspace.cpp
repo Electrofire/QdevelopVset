@@ -109,6 +109,8 @@ Model* Workspace::getModel(string experimentName, string ModelPath){
 void Workspace::updateExperimentsTree(){
 
     vector<Experiment*> experiments = getList_of_experiments();
-    for(int i=0; i< experiments.size(); i++)
+    for(int i=0; i< experiments.size(); i++){
+        experiments[i]->parse_paths();
         expMan.updateExperimentTree(experiments[i]);
+    }
 }

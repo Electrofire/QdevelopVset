@@ -206,7 +206,8 @@ void Experiment::create_models(vector<string> files, int model_type) {
                 model = new Model(files.at(i), this);
                 break;
         }
-        models.push_back(model);
+        if(searchModel(model->getPath()) == -1)
+            models.push_back(model);
     }
 
 }
