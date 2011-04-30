@@ -40,6 +40,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
     connect(actionRotate, SIGNAL(triggered()), this, SLOT(doRotate()));
     
    connect(actionNew_Workspace, SIGNAL(triggered()), this, SLOT(newWorkspace()));
+   connect(actionOpen_Workspace, SIGNAL(triggered()), this, SLOT(openWorkspace()));
     
     
    connect(actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -262,53 +263,119 @@ QString path = QString::fromStdString(pathXMLfromarg);
 }
 
 /**
- * Cesar
- * Creates a new workspace
+ * Cesar Chacon
+ * Creates a new workspace .vset file
+ * checks if it exits already
+ * if it exists asks the user if
+ * he/she wants to rewrite the file.
+ *
  */
 void MainWindowImpl::newWorkspace(){
-/**
-    
+bool writefile = false;
+    //create the streams
 ifstream inp;
 ofstream out;
 string newfilepath;
 
+
     QString Path = QFileDialog::getSaveFileName(this, "New file"  ,
-     "/",
-            tr("VSeT (*.vst)"));
+     "/", tr("VSeT (*.vst)"));
             
-             
-	newfilepath = Path.toStdString() + ".vst";
+   newfilepath = Path.toStdString() + ".vst";
 
 //try to open the file
-inp.open(newfilepath, ifstream::in);
+inp.open(newfilepath.c_str(), ifstream::in);
 //close the file
 inp.close();
 
-//if we could not open the file
-//then the file doesn't exist and
-//we can write to a file
-if(inp.fail())
-{
-inp.clear(ios::failbit);
-out.open(newfilepath, ofstream::out);
-//print projectname
-out << vswork.getName() << endl;
-//print all paths to experiments open
-vector<Experiment*> exlist = vswork.getList_of_experiments();
+//if the file exists
+if(!inp.fail()){
+	//if the file exists then ask the user if he/she wants
+	//to overwrite the file
+	
+QString msg = "The workspace already exists, do you want to overwrite it?";
+ QMessageBox msgBox;
+ msgBox.setText(msg);
+ msgBox.setIcon(QMessageBox::Warning);
+ msgBox.setInformativeText("Workspace Already Exists");
+ msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+ msgBox.setDefaultButton(QMessageBox::No);
+ int ret = msgBox.exec();
+ 
+ if(ret ==QMessageBox::YesRole){
+ 	writefile=true;
+	}else{
+		writefile = false;
+	}
+ 
+ 
+//cout << "Error...file """ << newfilepath.c_str() << """ exists" << endl;
+} else{
+	//if the file doesn't exist
+	inp.clear(ios::failbit);
+	writefile=true;
+}
+	
+	if(writefile){
+			
+		out.open(newfilepath.c_str(), ofstream::out);
+		//print projectname
+		//out << vswork.getName() << endl;
+		//print all paths to experiments open
+		vector<Experiment*> exlist = vswork.getList_of_experiments();
+		
+		for(unsigned int i=0;i<exlist.size();i++){
+	    out<<exlist[i]->getfullPath().c_str()<<endl;
+			
+		}
+		
+		//print word visualizations
+		//print all visualizations information
+	out.close();
+	}
+}
+/*
+ * Cesar Chacon
+ * unloads the existing workspace.
+ * Asks to save the current workspace
+ */
+void MainWindowImpl::openWorkspace(){
+	char buffer[256];
+	string temp;
+	//The system closes the currently loaded workspace (ALT 1).
+	vswork.clearExperimentManager();
+	
+	//The system opens a file selection dialog displaying 
+	//the files in the current working directory.
+	   QString pathToWS;
+       pathToWS = QFileDialog::getOpenFileName(
+        this,
+        "Select a workspace to open",
+        "/",
+        tr("VSeT (*.vst)")
+        );
 
-for(unsigned int i=0;i<exlist.size();i++){
-	exlist.
+
+//The user uses the file selection dialog to select the desired workspace (ALT 2) (ALT 3).
+if (pathToWS.isNull() == false){
+	  ifstream wsfile (pathToWS.toStdString().c_str());
+	  
+	   while (! wsfile.eof() )
+  {
+    wsfile.getline (buffer,100);
+    temp = buffer;
+    if(temp.length()>1){
+    vswork.add_experiment(buffer);	
+   	}
+    
+  }
+}
+
+//The system opens the workspace description file, displays the model visualization windows
+//in the state described in the workspace description file, and loads the model navigation
+//window with the names of models available for each of the experiments in the workspace.
+
 	
 }
-
-//print word visualizations
-//print all visualizations information
-out.close();
-}
-else
-{
-cout << "Error...file """ << myFileName.c_str() << """ exists" << endl;
-} 
- */
  
-}
+

@@ -44,6 +44,7 @@ class Workspace
 		string getName() const;
 		void setName(string name_);
 		void setTree(QTreeWidget *TreeWidget);
+		void clearExperimentManager();
 		vector<Visualization*> getList_of_visualizations() const;
 
 		//Experiment Methods

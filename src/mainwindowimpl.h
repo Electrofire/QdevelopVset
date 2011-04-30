@@ -54,7 +54,8 @@ private slots:
         void keyPressEvent( QKeyEvent * event );
         void setHourglassCursor();
         void setDefaultCursor();
-         void newWorkspace();
+        void newWorkspace();
+        void openWorkspace();
 	
 };
 #endif

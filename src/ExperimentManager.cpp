@@ -198,3 +198,7 @@ ExperimentManager::~ExperimentManager() {
 
 }
 
+void ExperimentManager::clearTree(){
+treeWidget->clear();
+	
+}

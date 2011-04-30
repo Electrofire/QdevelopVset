@@ -129,6 +129,11 @@ void Workspace::save_workspace(string){
 	
 	
 }
+
+void Workspace::clearExperimentManager(){
+	expMan.clearTree();
+	
+}
 /**
 int main()
 {

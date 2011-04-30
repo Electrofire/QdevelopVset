@@ -28,6 +28,7 @@ public:
     void remove_experiment(int index);
     void setTreeWidget(QTreeWidget *TreeWidget);
     int searchExperiment(string name);
+    void clearTree();
 
     //Manage experiments
     void add_experiment(Experiment*);
