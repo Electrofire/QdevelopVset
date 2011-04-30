@@ -13,6 +13,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 #include <QVTKWidget.h>
 #include <vtkSmartPointer.h>
 #include "vtkActor.h"
@@ -52,6 +54,8 @@ public:
     int getIteration();
     string getPath(){return path;}
     string getName();
+    QTreeWidgetItem *pchild;
+    QTreeWidgetItem *pchildA;
     //void render();
     //virtual int draw() {};
     

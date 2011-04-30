@@ -41,6 +41,19 @@ Experiment::Experiment(string f) {
     xml_filename = f;
     read_xml();
     parse_paths();
+    root = new QTreeWidgetItem();
+    rootA = new QTreeWidgetItem();
+    covItem = new QTreeWidgetItem();
+    covItemA = new QTreeWidgetItem();
+    timeItem = new QTreeWidgetItem();
+    timeItemA = new QTreeWidgetItem();
+    duItem = new QTreeWidgetItem();
+    duItemA = new QTreeWidgetItem();
+    s1Item = new QTreeWidgetItem();
+    s1ItemA = new QTreeWidgetItem();
+    s2Item = new QTreeWidgetItem();
+    s2ItemA = new QTreeWidgetItem();
+
 }
 
 Experiment::~Experiment() {
@@ -164,7 +177,6 @@ int Experiment::getdir(string path, vector<string> &files) {
       count++;
     }
     closedir(dp);
-
 
     return 0;
 }

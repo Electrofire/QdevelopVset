@@ -20,6 +20,8 @@ Model::Model(string path, Experiment *experiment) {
     name = base_name.substr(0, base_name.find(".") - 2);
     iteration = atoi(base_name.substr(base_name.find(".") - 2, 1).c_str());
     step = atoi(base_name.substr(base_name.find(".") - 1, 1).c_str());
+    pchild = new QTreeWidgetItem();
+    pchildA = new QTreeWidgetItem();
 }
 
 Model::Model() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>AnimatorWindow</class>
- <widget class="QDockWidget" name="AnimatorWindow">
+ <widget class="QMainWindow" name="AnimatorWindow">
   <property name="windowModality">
    <enum>Qt::NonModal</enum>
   </property>
@@ -13,17 +13,23 @@
     <height>462</height>
    </rect>
   </property>
+  <property name="windowTitle">
+   <string>VSeT - Animator</string>
+  </property>
   <property name="accessibleName">
    <string>VSeT - Animator</string>
   </property>
-  <property name="floating">
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <property name="floating" stdset="0">
    <bool>true</bool>
-  </property>
-  <property name="allowedAreas">
-   <set>Qt::NoDockWidgetArea</set>
-  </property>
-  <property name="windowTitle">
-   <string>VSeT - Animator</string>
   </property>
   <widget class="QWidget" name="dockWidgetContents">
    <widget class="QComboBox" name="comboBox">
@@ -172,22 +178,6 @@
      <string>Generate Animation</string>
     </property>
    </widget>
-   <widget class="QFrame" name="frame_2">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>290</y>
-      <width>131</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-   </widget>
    <widget class="QRadioButton" name="actionSpeedAnimation">
     <property name="geometry">
      <rect>
@@ -204,10 +194,10 @@
    <widget class="QRadioButton" name="actionSpeedAnimation_1">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>260</y>
+      <x>180</x>
+      <y>290</y>
       <width>101</width>
-      <height>16</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -218,7 +208,7 @@
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>290</y>
+      <y>320</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -230,8 +220,8 @@
    <widget class="QRadioButton" name="actionSpeedAnimation_3">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>290</y>
+      <x>320</x>
+      <y>260</y>
       <width>71</width>
       <height>22</height>
      </rect>
@@ -243,7 +233,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>160</x>
       <y>240</y>
       <width>281</width>
       <height>21</height>
@@ -253,31 +243,50 @@
      <string>Speed of Animation ( Seconds per Model)</string>
     </property>
    </widget>
-   <widget class="QListView" name="listView">
+   <widget class="QTreeWidget" name="modelWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>70</y>
       <width>141</width>
-      <height>161</height>
+      <height>192</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string notr="true">1</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QVTKWidget" name="qvtkWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>131</width>
+      <height>111</height>
      </rect>
     </property>
    </widget>
-   <widget class="QScrollBar" name="verticalScrollBar">
+   <widget class="QSpinBox" name="spinBox">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>70</y>
-      <width>16</width>
-      <height>160</height>
+      <x>318</x>
+      <y>290</y>
+      <width>71</width>
+      <height>27</height>
      </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
     </property>
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QVTKWidget</class>
+   <extends>QWidget</extends>
+   <header>QVTKWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

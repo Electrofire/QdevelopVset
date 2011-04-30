@@ -19,6 +19,8 @@
 #include <sys/types.h>
 #include <vector>
 #include "Model.h"
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 
 using namespace std;
 
@@ -37,20 +39,20 @@ public:
     /* END METHODS*/
     
     /* ATTRIBUTES */
-    vector<Model> open_models;
-    vector<Model*> models;
 
-    string project_name;
-    string project_path;
-    string xml_filename;
-    int iterations;
-    /* TODO: Make this an actual date object. */
-    string date;
-    int nx;
-    int ny;
-    int nz;
-    float h;
-    vector<ShotPoint> shot_points;
+    QTreeWidgetItem *root;
+    QTreeWidgetItem *rootA;
+    QTreeWidgetItem *covItem;
+    QTreeWidgetItem *covItemA;
+    QTreeWidgetItem *timeItem;
+    QTreeWidgetItem *timeItemA;
+    QTreeWidgetItem *duItem;
+    QTreeWidgetItem *duItemA;
+    QTreeWidgetItem *s1Item;
+    QTreeWidgetItem *s1ItemA;
+    QTreeWidgetItem *s2Item;
+    QTreeWidgetItem *s2ItemA;
+
     /* END ATTRIBUTES */
 private:
     /* METHODS */
@@ -67,11 +69,24 @@ private:
     string smoother2_path();
     string finalfiles_path();
 
-
     int getdir(string path, vector<string> &files);
     /* METHODS END */
 
     /* ATTRIBUTES */
+    vector<Model> open_models;
+    vector<Model*> models;
+
+    string project_name;
+    string project_path;
+    string xml_filename;
+    int iterations;
+    /* TODO: Make this an actual date object. */
+    string date;
+    int nx;
+    int ny;
+    int nz;
+    float h;
+    vector<ShotPoint> shot_points;
 
     /* ATTRIBUTES END */
 };

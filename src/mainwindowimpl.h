@@ -33,9 +33,10 @@ public:
         QCursor zoomCursor;
         QCursor rotateCursor;
         QCursor sliceCursor;
+        AnimatorWindow * win;
 
 private:
-  std::string intToString(int i);
+        std::string intToString(int i);
         QString binFile;
 
 private slots:
@@ -43,12 +44,12 @@ private slots:
         void saveFile();
         void OpenAnimatorWindow();
 	void refreshTreeItems();
-        void openModel(QTreeWidgetItem* item, int index);
+        void openModel(QTreeWidgetItem* item);
         void doSlice();
         void doZoom();
         void doPan();
         void doRotate();
-        void keyPressEvent( QKeyEvent * event );
+        void keyPressEvent( QKeyEvent * event );        
 	
 };
 #endif

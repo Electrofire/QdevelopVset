@@ -1,13 +1,24 @@
 #include "animatorwindow.h"
 
-AnimatorWindow::AnimatorWindow(QWidget *parent) :
-    QDockWidget(parent),
-    ui(new Ui::AnimatorWindow)
+AnimatorWindow::AnimatorWindow( QWidget * parent, Qt::WFlags f)
+    : QMainWindow(parent, f)
 {
-    ui->setupUi(this);
+    setupUi(this);
+    modelWidget->setColumnCount(3);
+    QStringList header;//EP Header
+    header << "Name" << "Iteration" << "Step";
+    modelWidget->setHeaderLabels(header);//assign headers
+    //vwork->setTree(modelWidget, false);
 }
 
 AnimatorWindow::~AnimatorWindow()
 {
-    delete ui;
+    delete this;
 }
+
+void AnimatorWindow::setTree(){
+
+    vwork->setTree(modelWidget, false);
+}
+
+
