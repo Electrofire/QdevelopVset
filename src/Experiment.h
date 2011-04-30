@@ -34,6 +34,7 @@ public:
     bool close_model(Model model);
     bool open_model(Model model);
     string getprojectName();
+    string getfullPath();
     vector<Model*> getModels();
     int searchModel(string path);
     void parse_paths();

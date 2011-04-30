@@ -1,7 +1,7 @@
 /*
  * Workspace.h
  *
- *      Author: Joel Quintana
+ *      Author: Joel Quintana, Cesar Chacon
  *
  *      WORKSPACE
  *      This class contains all the information relevant to a Visualization Project
@@ -44,7 +44,12 @@ class Workspace
                 ExperimentManager getExpMan(){return expMan;}
 		string getName() const;
 		void setName(string name_);
+<<<<<<< HEAD
                 void setTree(QTreeWidget *TreeWidget, bool main);
+=======
+		void setTree(QTreeWidget *TreeWidget);
+		void clearExperimentManager();
+>>>>>>> 236eb128dfd296219f38bd435f15714e346b569d
 		vector<Visualization*> getList_of_visualizations() const;
 
 		//Experiment Methods

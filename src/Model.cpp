@@ -40,4 +40,3 @@ string Model::getName(){
     return name;
 }
 
-

@@ -29,9 +29,13 @@ public:
     void remove_experiment(int index);
     void setTreeWidget(QTreeWidget *TreeWidget, bool main);
     int searchExperiment(string name);
+<<<<<<< HEAD
     void initializeExperimentTree(Experiment* new_experiment);
     void updateExperimentTree(Experiment* experiment);
     string convertInt(int number);
+=======
+    void clearTree();
+>>>>>>> 236eb128dfd296219f38bd435f15714e346b569d
 
     //Manage experiments
     void add_experiment(Experiment*);

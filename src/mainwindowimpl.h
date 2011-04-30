@@ -14,6 +14,8 @@
 #include "animatorwindow.h"
 #include "ui_animatorwindow.h"
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
 //
 class MainWindowImpl : public QMainWindow, public Ui::MainWindow
 {
@@ -33,7 +35,11 @@ public:
         QCursor zoomCursor;
         QCursor rotateCursor;
         QCursor sliceCursor;
+<<<<<<< HEAD
         AnimatorWindow * win;
+=======
+        QCursor hourglassCursor;
+>>>>>>> 236eb128dfd296219f38bd435f15714e346b569d
 
 private:
         std::string intToString(int i);
@@ -43,17 +49,26 @@ private slots:
 	void openSelect();
         void saveFile();
         void OpenAnimatorWindow();
+<<<<<<< HEAD
 	void refreshTreeItems();
         void openModel(QTreeWidgetItem* item);
+=======
+	//void refreshTreeItems();
+        void openModel(QTreeWidgetItem* item, int index);
+>>>>>>> 236eb128dfd296219f38bd435f15714e346b569d
         void doSlice();
         void doZoom();
         void doPan();
         void doRotate();
+<<<<<<< HEAD
         void keyPressEvent( QKeyEvent * event );        
+=======
+        void keyPressEvent( QKeyEvent * event );
+        void setHourglassCursor();
+        void setDefaultCursor();
+        void newWorkspace();
+        void openWorkspace();
+>>>>>>> 236eb128dfd296219f38bd435f15714e346b569d
 	
 };
 #endif
-
-
-
-

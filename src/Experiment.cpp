@@ -229,3 +229,11 @@ int Experiment::searchModel(string path){
     }
     return -1; //error?
 }
+
+/**
+ * Cesar Chacon
+ * Return full project Path
+ */
+string Experiment::getfullPath(){
+	return xml_filename;
+}
