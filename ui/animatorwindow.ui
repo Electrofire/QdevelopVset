@@ -17,7 +17,10 @@
    <string>VSeT - Animator</string>
   </property>
   <property name="floating">
-   <bool>false</bool>
+   <bool>true</bool>
+  </property>
+  <property name="allowedAreas">
+   <set>Qt::NoDockWidgetArea</set>
   </property>
   <property name="windowTitle">
    <string>VSeT - Animator</string>
@@ -76,7 +79,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../ui/stop.png</normaloff>../ui/stop.png</iconset>
+      <normaloff>stop.png</normaloff>stop.png</iconset>
     </property>
    </widget>
    <widget class="QToolButton" name="actionFFW">
@@ -93,7 +96,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../ui/stepfw.png</normaloff>../ui/stepfw.png</iconset>
+      <normaloff>stepfw.png</normaloff>stepfw.png</iconset>
     </property>
    </widget>
    <widget class="QToolButton" name="actionPlay">
@@ -110,7 +113,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../ui/play.png</normaloff>../ui/play.png</iconset>
+      <normaloff>play.png</normaloff>play.png</iconset>
     </property>
    </widget>
    <widget class="QToolButton" name="actionRew">
@@ -127,7 +130,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../ui/stepbw.png</normaloff>../ui/stepbw.png</iconset>
+      <normaloff>stepbw.png</normaloff>stepbw.png</iconset>
     </property>
    </widget>
    <widget class="QLabel" name="label">

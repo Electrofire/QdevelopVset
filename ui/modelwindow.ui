@@ -2,16 +2,22 @@
 <ui version="4.0">
  <class>ModelWindow</class>
  <widget class="QMainWindow" name="ModelWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>250</width>
+    <height>250</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="dockNestingEnabled">
+   <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QVTKWidget" name="titis">
@@ -40,7 +46,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>250</width>
      <height>25</height>
     </rect>
    </property>

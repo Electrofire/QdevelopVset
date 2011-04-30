@@ -199,7 +199,7 @@
          <number>4</number>
         </property>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,2,10,2,3">
+         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,2,10,0,3">
           <property name="spacing">
            <number>6</number>
           </property>
@@ -303,18 +303,11 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0">
+           <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
             <item>
-             <widget class="QProgressBar" name="progressBar">
-              <property name="value">
-               <number>24</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QProgressBar" name="progressBar_2">
-              <property name="value">
-               <number>24</number>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Iteration:</string>
               </property>
              </widget>
             </item>
@@ -347,7 +340,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -384,10 +377,14 @@
     <addaction name="actionRotate"/>
     <addaction name="actionSlice"/>
    </widget>
-   <widget class="QMenu" name="menuSubwindows">
+   <widget class="QMenu" name="menuWorkspace">
     <property name="title">
-     <string>Subwindows</string>
+     <string>Workspace</string>
     </property>
+    <addaction name="actionNew_Workspace"/>
+    <addaction name="actionOpen_Workspace"/>
+    <addaction name="actionSave_Workspace"/>
+    <addaction name="actionSave_Workspace_As"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -400,7 +397,7 @@
    <addaction name="menuEdit"/>
    <addaction name="menuView"/>
    <addaction name="menuTools"/>
-   <addaction name="menuSubwindows"/>
+   <addaction name="menuWorkspace"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionOpen">
@@ -481,6 +478,26 @@
   <action name="actionSlice">
    <property name="text">
     <string>Slice</string>
+   </property>
+  </action>
+  <action name="actionOpen_Workspace">
+   <property name="text">
+    <string>Open Workspace</string>
+   </property>
+  </action>
+  <action name="actionSave_Workspace">
+   <property name="text">
+    <string>Save Workspace</string>
+   </property>
+  </action>
+  <action name="actionNew_Workspace">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionSave_Workspace_As">
+   <property name="text">
+    <string>Save Workspace As..</string>
    </property>
   </action>
  </widget>

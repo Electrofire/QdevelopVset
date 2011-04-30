@@ -1,7 +1,7 @@
 /*
  * Workspace.h
  *
- *      Author: Joel Quintana
+ *      Author: Joel Quintana, Cesar Chacon
  *
  *      WORKSPACE
  *      This class contains all the information relevant to a Visualization Project
@@ -65,7 +65,7 @@ class Workspace
 		void save_workspace(string); //Save workspace to the disk
 		void load_workspace(string); //Loade workspace from disk
 		
-    Model find_model(QTreeWidgetItem* item);
+    //Model find_model(QTreeWidgetItem* item);
 };
 
 #endif /* WORKSPACE_H_ */

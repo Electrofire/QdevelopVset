@@ -1,7 +1,7 @@
 /*
  * Workspace.cpp
  *
- *      Author: Joel Quintana
+ *      Author: Joel Quintana, Cesar Chacon
  *
  *      WORKSPACE
  *      This class contains all the information relevant to a
@@ -102,6 +102,7 @@ void Workspace::setTree(QTreeWidget *TreeWidget){
 	expMan.setTreeWidget(TreeWidget);
 }
 
+//Search ModelPath in ExperimentName and return a model
 Model* Workspace::getModel(string experimentName, string ModelPath){
 
     int exp = expMan.searchExperiment(experimentName);
@@ -111,6 +112,23 @@ Model* Workspace::getModel(string experimentName, string ModelPath){
 }
 
 
+/**
+ *Cesar Chacon
+ * Saves the workspace to a text file
+ * Format:
+ * <<Workspace Name>>
+ * <<home/username/project.xml>>
+ * <<home/username/project2.xml>>
+ * <<home/username/project3.xml>>
+ * Visualizations
+ * <</home/username/project/icov.3d>>
+ * <<X position of the window>>
+ * <<Y position of the window>>
+ */
+void Workspace::save_workspace(string){
+	
+	
+}
 /**
 int main()
 {

@@ -8,22 +8,23 @@
 #ifndef MODEL_H
 #define	MODEL_H
 
+#include "modelwindow.h"
+#include "Experiment.h"
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Experiment.h"
 #include <QVTKWidget.h>
 #include <vtkSmartPointer.h>
-#include "modelwindow.h"
-
-
 #include "vtkActor.h"
 #include "vtkColorTransferFunction.h"
 #include "vtkContourFilter.h"
+#include "vtkCamera.h"
 #include "vtkImageReader.h"
+#include "vtkInteractorStyleTrackballCamera.h"
 #include "vtkOutlineFilter.h"
 #include "vtkPiecewiseFunction.h"
 #include "vtkPolyDataMapper.h"
+#include "vtkProperty.h"
 #include "vtkRenderLargeImage.h"
 #include "vtkRenderWindow.h"
 #include "vtkRenderWindowInteractor.h"
@@ -34,6 +35,7 @@
 #include "vtkVolumeProperty.h"
 #include "vtkVolumeRayCastCompositeFunction.h"
 #include "vtkVolumeRayCastMapper.h"
+#include "vtkWindowToImageFilter.h"
 #include "vtkCommand.h"
 
 using namespace std;
@@ -50,7 +52,7 @@ public:
     int getIteration();
     string getPath(){return path;}
     string getName();
-    void render();
+    //void render();
     //virtual int draw() {};
     
     int step;
@@ -61,12 +63,14 @@ protected:
    // virtual int read() {};
     string path;
 private:
-  void TkCheckAbort(vtkRenderWindow *renWin);
-  void renderVel();
-  void renderTime();
-  void renderTimeWOVol();
-  void renderDusum();
-  void renderCoverage();
+    //void TkCheckAbort(vtkRenderWindow *renWin);
+    /**
+    void renderVel();
+    void renderTime();
+    void renderTimeWOVol();
+    void renderDusum();
+    void renderCoverage();
+    */
 };
 
 class PerturbationModel: public Model {
