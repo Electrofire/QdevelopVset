@@ -50,7 +50,7 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 
     //Initialize custom cursor pointers
     QBitmap zoomB("zoom.png");
-    QBitmap rotateB("rotate.png");
+    QBitmap rotateB("rotate.jpeg");
     QBitmap sliceB("slice.png");
     zoomCursor = QCursor(zoomB, -1, -1);
     rotateCursor = QCursor(rotateB, -1, -1);

@@ -15,10 +15,12 @@ public:
     explicit AnimatorWindow( QWidget * parent = 0, Qt::WFlags f = 0 );
     ~AnimatorWindow();
     void setTree();
+    void createCheckBoxes();
 
     Workspace* vwork;
 
 private:
+
 };
 
 #endif // ANIMATORWINDOW_H

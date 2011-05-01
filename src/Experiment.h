@@ -33,11 +33,15 @@ public:
     virtual ~Experiment();
     bool close_model(Model model);
     bool open_model(Model model);
-    string getprojectName();
-    string getfullPath();
-    vector<Model*> getModels();
+    string getfullPath() {return xml_filename;}
+    string getprojectName() {return project_name;}
+    vector<Model*> getModels(){return models;}
     int searchModel(string path);
     void parse_paths();
+    void checkModifiedModels();
+    void updateModelPaths(vector<string> files);
+
+
     /* END METHODS*/
     
     /* ATTRIBUTES */
@@ -88,6 +92,9 @@ private:
     int nz;
     float h;
     vector<ShotPoint> shot_points;
+
+    vector<string> allFiles;
+
 
     /* ATTRIBUTES END */
 };

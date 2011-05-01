@@ -30,13 +30,12 @@ Model::Model() {
 Model::~Model() {
 }
 
-int Model::getStep(){
-    return step;
-}
-int Model::getIteration(){
-    return iteration;
-}
-string Model::getName(){
-    return name;
+int Model::needsDeleteAt(vector<string> files){
+
+    for(int i=0; i< files.size(); i++)
+        if(path.compare(files[i]) == 0)
+            return i;
+
+    return -1;
 }
 
