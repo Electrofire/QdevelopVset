@@ -27,9 +27,11 @@ HEADERS += src/animatorwindow.h \
            src/Visualization.h \
            src/Workspace.h \
            src/modelwindow.h \
-    src/updateThread.h
+    src/updateThread.h \
+    src/syncgroupwindow.h
 FORMS += ui/animatorwindow.ui ui/mainwindow.ui \
-         ui/modelwindow.ui
+         ui/modelwindow.ui \
+    ui/syncgroupwindow.ui
 SOURCES += src/animatorwindow.cpp \
            src/CoverageModel.cpp \
            src/Experiment.cpp \
@@ -46,4 +48,5 @@ SOURCES += src/animatorwindow.cpp \
            src/Visualization.cpp \
            src/Workspace.cpp \
            src/modelwindow.cpp \
-    src/updateThread.cpp
+    src/updateThread.cpp \
+    src/syncgroupwindow.cpp
