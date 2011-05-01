@@ -76,7 +76,6 @@ ExperimentManager::~ExperimentManager() {
 
 }
 
-<<<<<<< HEAD
 //Set the Treewidget reference
 void ExperimentManager::setTreeWidget(QTreeWidget *TreeWidget, bool main){
     if(main)
@@ -263,9 +262,8 @@ string ExperimentManager::convertInt(int number){
 
     return returnvalue;
 }
-=======
+
 void ExperimentManager::clearTree(){
-treeWidget->clear();
+    treeWidget->clear();
 	
 }
->>>>>>> 236eb128dfd296219f38bd435f15714e346b569d

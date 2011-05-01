@@ -43,13 +43,9 @@ class Workspace
 		//Accessors and mutators
                 ExperimentManager getExpMan(){return expMan;}
 		string getName() const;
-		void setName(string name_);
-<<<<<<< HEAD
+                void setName(string name_);
                 void setTree(QTreeWidget *TreeWidget, bool main);
-=======
-		void setTree(QTreeWidget *TreeWidget);
-		void clearExperimentManager();
->>>>>>> 236eb128dfd296219f38bd435f15714e346b569d
+                void clearExperimentManager();
 		vector<Visualization*> getList_of_visualizations() const;
 
 		//Experiment Methods

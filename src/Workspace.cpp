@@ -108,14 +108,13 @@ Model* Workspace::getModel(string experimentName, string ModelPath){
 
 void Workspace::updateExperimentsTree(){
 
-<<<<<<< HEAD
     vector<Experiment*> experiments = getList_of_experiments();
     for(int i=0; i< experiments.size(); i++){
         experiments[i]->parse_paths();
         expMan.updateExperimentTree(experiments[i]);
     }
 }
-=======
+
 /**
  *Cesar Chacon
  * Saves the workspace to a text file
@@ -138,45 +137,3 @@ void Workspace::clearExperimentManager(){
 	expMan.clearTree();
 	
 }
-/**
-int main()
-{
-	cout << "Running" << endl;
-
-	cout << "\nInitializing workspace" << endl;
-	Workspace my_workspace;
-
-	cout << "\nCreate some experiments" << endl;
-	Experiment e1 = Experiment("e1");
-	cout << "Created: " << e1.getprojectName() << endl;
-
-	Experiment e2 = Experiment("e2");
-	cout << "Created: " << e2.getprojectName() << endl;
-
-	Experiment e3 = Experiment("e3");
-	cout << "Created: " << e3.getprojectName() << endl;
-
-	cout << "\nAdding experiments to the workspace" << endl;
-	my_workspace.add_experiment(&e1);
-	my_workspace.add_experiment(&e2);
-	my_workspace.add_experiment(&e3);
-	cout << "Added" << endl;
-
-	cout << "List experiments in the workspace" << endl;
-	my_workspace.print_list_of_experiments();
-
-	cout << "\nRemove experiment at index 1" << endl;
-	my_workspace.remove_experiment(1);
-
-	cout << "List experiments in the workspace again to show the change" << endl;
-	my_workspace.print_list_of_experiments();
-
-	cout << "\nRemove experiment e1" << endl;
-	my_workspace.remove_experiment(&e1);
-
-	cout << "List experiments in the workspace again to show the change" << endl;
-	my_workspace.print_list_of_experiments();
-
-	cout << "\nComplete" << endl;
-}**/
->>>>>>> 236eb128dfd296219f38bd435f15714e346b569d
