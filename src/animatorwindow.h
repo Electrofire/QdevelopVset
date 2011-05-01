@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include "ui_animatorwindow.h"
 #include "Workspace.h"
+#include "updateThread.h"
 
     class AnimatorWindow : public QMainWindow, public Ui::AnimatorWindow
 {
@@ -22,6 +23,7 @@ public:
 private:
 
     Visualization* modelVisualization;
+    updateThread * updatesT;
 
 private slots:
 

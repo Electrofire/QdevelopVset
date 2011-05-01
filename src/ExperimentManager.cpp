@@ -229,14 +229,6 @@ void ExperimentManager::updateExperimentTree(Experiment* experiment){
         models[i]->pchildA = pchildA;
     }
 
-    treeWidget->setSortingEnabled(true);
-    treeWidgetA->setSortingEnabled(true);
-    treeWidget->resizeColumnToContents(1);
-    treeWidgetA->resizeColumnToContents(1);
-    treeWidget->resizeColumnToContents(2);
-    treeWidgetA->resizeColumnToContents(2);
-    treeWidget->resizeColumnToContents(3);
-    treeWidgetA->resizeColumnToContents(3);
     treeWidget->sortItems(1, Qt::AscendingOrder);
     treeWidgetA->sortItems(1, Qt::AscendingOrder);
     treeWidget->sortItems(2, Qt::AscendingOrder);

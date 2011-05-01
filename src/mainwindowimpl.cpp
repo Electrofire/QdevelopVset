@@ -204,7 +204,6 @@ void MainWindowImpl::OpenAnimatorWindow(){
     if(!win->isVisible()){
         win->show();
         win->activateWindow();
-        vswork.updateExperimentsTree();
     }
 
     else{

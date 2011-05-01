@@ -9,6 +9,10 @@ AnimatorWindow::AnimatorWindow( QWidget * parent, Qt::WFlags f)
     header << "" << "Name" << "Iteration" << "Step";
     modelWidget->setHeaderLabels(header);//assign headers
     connect(modelWidget, SIGNAL(itemClicked ( QTreeWidgetItem*, int ) ), this, SLOT(showModel(QTreeWidgetItem*)));
+
+    //Updates thread
+    updatesT = new updateThread;
+    updatesT->start();
 }
 
 AnimatorWindow::~AnimatorWindow()
@@ -18,6 +22,7 @@ AnimatorWindow::~AnimatorWindow()
 
 void AnimatorWindow::setTree(){
 
+    updatesT->vswork = vwork;
     vwork->setTree(modelWidget, false);
 }
 

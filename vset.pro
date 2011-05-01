@@ -26,7 +26,8 @@ HEADERS += src/animatorwindow.h \
            src/ShotPoint.h \
            src/Visualization.h \
            src/Workspace.h \
-           src/modelwindow.h
+           src/modelwindow.h \
+    src/updateThread.h
 FORMS += ui/animatorwindow.ui ui/mainwindow.ui \
          ui/modelwindow.ui
 SOURCES += src/animatorwindow.cpp \
@@ -44,4 +45,5 @@ SOURCES += src/animatorwindow.cpp \
            src/VelocityModel.cpp \
            src/Visualization.cpp \
            src/Workspace.cpp \
-           src/modelwindow.cpp
+           src/modelwindow.cpp \
+    src/updateThread.cpp
