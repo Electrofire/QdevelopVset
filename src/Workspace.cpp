@@ -97,8 +97,18 @@ void Workspace::setTree(QTreeWidget *TreeWidget, bool main){
         expMan.setTreeWidget(TreeWidget, main);
 }
 
+Model* Workspace::getModel(QTreeWidgetItem *item){
+
+    string modelInfo = item->whatsThis(0).toStdString();
+    int next = modelInfo.rfind(" ");
+    string ExperimentName = modelInfo.substr(0, next);
+    string ModelName = modelInfo.substr(next+1, modelInfo.length());
+
+    return findModel(ExperimentName, ModelName);
+}
+
 //Search ModelPath in ExperimentName and return a model
-Model* Workspace::getModel(string experimentName, string ModelPath){
+Model* Workspace::findModel(string experimentName, string ModelPath){
 
     int exp = expMan.searchExperiment(experimentName);
     Experiment* experiment = expMan.getList_of_experiments()[exp];

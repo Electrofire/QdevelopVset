@@ -8,6 +8,7 @@ AnimatorWindow::AnimatorWindow( QWidget * parent, Qt::WFlags f)
     QStringList header;//EP Header
     header << "" << "Name" << "Iteration" << "Step";
     modelWidget->setHeaderLabels(header);//assign headers
+    connect(modelWidget, SIGNAL(itemClicked ( QTreeWidgetItem*, int ) ), this, SLOT(showModel(QTreeWidgetItem*)));
 }
 
 AnimatorWindow::~AnimatorWindow()
@@ -18,6 +19,14 @@ AnimatorWindow::~AnimatorWindow()
 void AnimatorWindow::setTree(){
 
     vwork->setTree(modelWidget, false);
+}
+
+void AnimatorWindow::showModel(QTreeWidgetItem *item){
+
+    if(item->childCount())
+        return;
+    Model* model = vwork->getModel(item);
+    modelVisualization->render_model(model, modelWindow);
 }
 
 void AnimatorWindow::createCheckBoxes(){

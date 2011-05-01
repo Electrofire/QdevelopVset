@@ -51,7 +51,8 @@ class Workspace
 		//Experiment Methods
                 void add_experiment(string expstring);
 		vector<Experiment*> getList_of_experiments() const;
-                Model* getModel(string experimentName, string ModelPath);
+                Model* getModel(QTreeWidgetItem *item);
+                Model* findModel(string experimentName, string ModelPath);
                 void updateExperimentsTree();
     
 		//Manage visualizations

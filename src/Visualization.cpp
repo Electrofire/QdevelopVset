@@ -79,12 +79,44 @@ void Visualization::render_model(Model* model) {
 
     // Create the standard renderer, render window
     // and interactor
-    string model_name= model->getName();
-    vtkRenderer *ren1 = vtkRenderer::New();
-    vtkRenderWindow *renWin = vtkRenderWindow::New();
-    renWin->AddRenderer(ren1);
+    setRenderWindow(model);
+
     vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
     iren->SetRenderWindow(renWin);
+
+    render_model();
+
+    renWin->Render();
+
+    TkCheckAbort(renWin);
+
+    iren->Initialize();
+    iren->Start();
+}
+
+void Visualization::render_model(Model* model, QVTKWidget* modelWindow) {
+
+    // Create the standard renderer, render window
+    // and interactor
+    setRenderWindow(model);
+
+    render_model();
+
+    modelWindow->SetRenderWindow(renWin);
+
+    renWin->Render();
+    TkCheckAbort(renWin);
+}
+
+void Visualization::setRenderWindow(Model* model){
+
+    model_name= model->getName();
+    ren1 = vtkRenderer::New();
+    renWin = vtkRenderWindow::New();
+    renWin->AddRenderer(ren1);
+}
+
+void Visualization::render_model(){
 
     // Create the reader for the data
     vtkImageReader *reader = vtkImageReader::New();
@@ -230,14 +262,4 @@ void Visualization::render_model(Model* model) {
     ren1->AddActor(contActor);
     ren1->AddActor(outlineActor);
     renWin->SetSize(600, 600);
-
-    renWin->Render();
-
-    TkCheckAbort(renWin);
-
-    iren->Initialize();
-    iren->Start();
-    //create_snapshot(ren1, "caca");
-    //*********************************************************
-
 }

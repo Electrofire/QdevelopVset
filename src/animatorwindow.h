@@ -21,6 +21,12 @@ public:
 
 private:
 
+    Visualization* modelVisualization;
+
+private slots:
+
+    void showModel(QTreeWidgetItem* item);
+
 };
 
 #endif // ANIMATORWINDOW_H

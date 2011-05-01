@@ -214,12 +214,7 @@ void MainWindowImpl::OpenAnimatorWindow(){
 
 void MainWindowImpl::openModel(QTreeWidgetItem *item) {
 
-  string modelInfo = item->whatsThis(0).toStdString();
-  int next = modelInfo.rfind(" ");
-  string ExperimentName = modelInfo.substr(0, next);
-  string ModelName = modelInfo.substr(next+1, modelInfo.length());
-
-  Model* model = vswork.getModel(ExperimentName, ModelName);
+  Model* model = vswork.getModel(item);
   Visualization* vis = new Visualization();
   vswork.add_visualization(vis);
   vis->render_model(model);

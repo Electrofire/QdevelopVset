@@ -258,7 +258,7 @@
      </property>
     </column>
    </widget>
-   <widget class="QVTKWidget" name="qvtkWidget">
+   <widget class="QVTKWidget" name="modelWindow">
     <property name="geometry">
      <rect>
       <x>20</x>
