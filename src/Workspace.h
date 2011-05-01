@@ -32,6 +32,8 @@ class Workspace
 	private:
 		//Attributes
 		string name_;
+		//absolute path to the XML example: home/somefolder/name_.vset
+		string absolutePath;
 		vector<Visualization*> list_of_visualizations_;
 		ExperimentManager expMan;
 
@@ -42,7 +44,10 @@ class Workspace
 
 		//Accessors and mutators
 		string getName() const;
+		string getPath() const;
+		
 		void setName(string name_);
+		void setPath(string absolutePath);
 		void setTree(QTreeWidget *TreeWidget);
 		void clearExperimentManager();
 		vector<Visualization*> getList_of_visualizations() const;

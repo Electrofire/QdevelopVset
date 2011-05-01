@@ -13,7 +13,7 @@
  *      - has the ability to save to and load from disk
  *      - calls the animation interface
  *
- *		Last update: 11:13 am / 25 / March / 2011
+ *	
  */
 
 #include "Workspace.h"
@@ -22,7 +22,8 @@
 //Default constructor
 Workspace::Workspace()
 {
-	name_ = "Default";
+	name_ = "default";
+	absolutePath = "/default.vst";
 }
 
 //Default destructor
@@ -31,10 +32,16 @@ Workspace::~Workspace()
 
 }
 
-//Accessr for the name
+//Accessor for the name
 string Workspace::getName() const
 {
     return name_;
+}
+
+//Accessor for the absolute Path
+string Workspace::getPath() const
+{
+    return absolutePath;
 }
 
 //Mutator for the name
@@ -42,6 +49,13 @@ void Workspace::setName(string name_)
 {
     this->name_ = name_;
 }
+
+//Cesar Chacon Mutator for the name
+void Workspace::setPath(string absolutePath)
+{
+    this->absolutePath = absolutePath;
+}
+
 
 //Return the list of experiments added to the workspace
 vector<Experiment*> Workspace::getList_of_experiments() const {

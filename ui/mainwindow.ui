@@ -382,8 +382,8 @@
      <string>Workspace</string>
     </property>
     <addaction name="actionNew_Workspace"/>
-    <addaction name="actionOpen_Workspace"/>
     <addaction name="actionSave_Workspace"/>
+    <addaction name="actionOpen_Workspace"/>
     <addaction name="actionSave_Workspace_As"/>
    </widget>
    <widget class="QMenu" name="menuHelp">

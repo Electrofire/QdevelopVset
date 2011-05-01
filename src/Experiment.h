@@ -37,22 +37,7 @@ public:
     int searchModel(string path);
     /* END METHODS*/
     
-    /* ATTRIBUTES */
-    vector<Model> open_models;
-    vector<Model*> models;
-
-    string project_name;
-    string project_path;
-    string xml_filename;
-    int iterations;
-    /* TODO: Make this an actual date object. */
-    string date;
-    int nx;
-    int ny;
-    int nz;
-    float h;
-    vector<ShotPoint> shot_points;
-    /* END ATTRIBUTES */
+  
 private:
     /* METHODS */
     void read_xml();
@@ -68,7 +53,22 @@ private:
     string smoother2_path();
     string finalfiles_path();
 
+  /* ATTRIBUTES */
+    vector<Model> open_models;
+    vector<Model*> models;
 
+    string project_name;
+    string project_path;
+    string xml_filename;
+    int iterations;
+    /* TODO: Make this an actual date object. */
+    string date;
+    int nx;
+    int ny;
+    int nz;
+    float h;
+    vector<ShotPoint> shot_points;
+    /* END ATTRIBUTES */
     int getdir(string path, vector<string> &files);
     /* METHODS END */
 

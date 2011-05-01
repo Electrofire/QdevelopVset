@@ -271,77 +271,184 @@ QString path = QString::fromStdString(pathXMLfromarg);
  *
  */
 void MainWindowImpl::newWorkspace(){
-bool writefile = false;
-    //create the streams
-ifstream inp;
-ofstream out;
-string newfilepath;
-
-
-    QString Path = QFileDialog::getSaveFileName(this, "New file"  ,
-     "/", tr("VSeT (*.vst)"));
-            
-   newfilepath = Path.toStdString() + ".vst";
-
-//try to open the file
-inp.open(newfilepath.c_str(), ifstream::in);
-//close the file
-inp.close();
-
-//if the file exists
-if(!inp.fail()){
-	//if the file exists then ask the user if he/she wants
-	//to overwrite the file
+	bool writefile = false;
+	    //create the streams
+	ifstream inp;
+	ofstream out;
+	string newfilepath;
 	
-QString msg = "The workspace already exists, do you want to overwrite it?";
- QMessageBox msgBox;
- msgBox.setText(msg);
- msgBox.setIcon(QMessageBox::Warning);
- msgBox.setInformativeText("Workspace Already Exists");
- msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
- msgBox.setDefaultButton(QMessageBox::No);
- int ret = msgBox.exec();
- 
- if(ret ==QMessageBox::YesRole){
- 	writefile=true;
-	}else{
-		writefile = false;
-	}
- 
- 
-//cout << "Error...file """ << newfilepath.c_str() << """ exists" << endl;
-} else{
-	//if the file doesn't exist
-	inp.clear(ios::failbit);
-	writefile=true;
-}
+		//Ask the user for a path and filename 
+		//to save the workspace to.
+	    QString Path = QFileDialog::getSaveFileName(this, "New file"  ,
+	     "/", tr("VSeT (*.vst)"));
+	    //Add the .vst string for the file name and path given
+	   newfilepath = Path.toStdString() + ".vst";
 	
-	if(writefile){
+	//try to open the file
+	inp.open(newfilepath.c_str(), ifstream::in);
+	//close the file
+		inp.close();
+	
+	//if the file exists
+	if(!inp.fail()){
+			//if the file exists then ask the user if he/she wants
+			//to overwrite the file
 			
-		out.open(newfilepath.c_str(), ofstream::out);
-		//print projectname
-		//out << vswork.getName() << endl;
-		//print all paths to experiments open
-		vector<Experiment*> exlist = vswork.getList_of_experiments();
+			//Qmessage box with Yes No buttons
+		QString msg = "The workspace already exists, do you want to overwrite it?";
+		 QMessageBox msgBox;
+		 msgBox.setText(msg);
+		 msgBox.setIcon(QMessageBox::Warning);
+		 msgBox.setInformativeText("Workspace Already Exists");
+		 msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+		 msgBox.setDefaultButton(QMessageBox::No);
+		 int ret = msgBox.exec();
+		 
+		 if(ret ==QMessageBox::Yes){
+		 	writefile=true;
+			}else{
+				writefile = false;
+			}
+		 
+	 
+	//cout << "Error...file """ << newfilepath.c_str() << """ exists" << endl;
+	} else{
+		//if the file doesn't exist
 		
-		for(unsigned int i=0;i<exlist.size();i++){
-	    out<<exlist[i]->getfullPath().c_str()<<endl;
-			
+		writefile=true;
+	}
+		inp.clear(ios::failbit);
+		if(writefile){
+			//create a new file with the user given string
+			out.open(newfilepath.c_str(), ofstream::out);
+			//get all the experiments open from the workspace
+			vector<Experiment*> exlist = vswork.getList_of_experiments();
+			//write all the opened experiments on the workspace
+			for(unsigned int i=0;i<exlist.size();i++){
+				 out<<exlist[i]->getfullPath().c_str()<<endl;
+				
+			}
+			//TODO
+			//print word visualizations
+			//print all visualizations information
+		out.close();
 		}
-		
-		//print word visualizations
-		//print all visualizations information
-	out.close();
-	}
 }
 /*
  * Cesar Chacon
  * unloads the existing workspace.
  * Asks to save the current workspace
+ * if it has any changes.
  */
 void MainWindowImpl::openWorkspace(){
 	char buffer[256];
 	string temp;
+	//counter for the number of projects stored in the file
+	int projinFile=0;
+	
+	//has the user modified the workspace since the last save?
+	//if yes prompt the user to save the changes
+		
+		//open the current workspace absolute path
+		//if it doesn't exist don't do anything
+
+	bool writefile = false;
+	    //create the streams
+	ifstream inp;
+	ofstream out;
+	string newfilepath;
+	
+	//try to open current workspace path
+	inp.open(vswork.getPath().c_str(), ifstream::in);
+	//close the file
+	inp.close();
+	
+	//if the file exists
+	if(!inp.fail()){
+		//open the file
+	ifstream wsfile (vswork.getPath().c_str());
+	//cycle through the number of lines and count the opened
+	//experiments.	
+		while (! wsfile.eof() ) {
+		    wsfile.getline (buffer,100);
+		    temp = buffer;
+		    if(temp.length()>1){
+		  		projinFile++;	
+		   	}
+    
+  		}
+	
+	}else{//the current project has not been saved
+		 //ask the user to save it.
+		 
+		 
+		 //Qmessage box with Yes No buttons
+		QString msg = "The current workspace has not been saved, would you like to save the changes?";
+		 QMessageBox msgBox;
+		 msgBox.setText(msg);
+		 msgBox.setIcon(QMessageBox::Warning);
+		 msgBox.setInformativeText("Workspace Already Exists");
+		 msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+		 msgBox.setDefaultButton(QMessageBox::No);
+		 int ret = msgBox.exec();
+		 
+		 if(ret ==QMessageBox::Yes){
+		 	writefile=true;
+			}else{
+				writefile = false;
+			}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	 QString Path = QFileDialog::getSaveFileName(this, "New file"  ,
+	     "/", tr("VSeT (*.vst)"));
+	            
+	   newfilepath = Path.toStdString() + ".vst";
+	
+	//try to open the file
+	inp.open(newfilepath.c_str(), ifstream::in);
+	//close the file
+	inp.close();
+	
+	//if the file exists
+	if(!inp.fail()){
+		//if the file exists then ask the user if he/she wants
+		//to overwrite the file
+		
+	QString msg = "The workspace already exists, do you want to overwrite it?";
+	 QMessageBox msgBox;
+	 msgBox.setText(msg);
+	 msgBox.setIcon(QMessageBox::Warning);
+	 msgBox.setInformativeText("Workspace Already Exists");
+	 msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	 msgBox.setDefaultButton(QMessageBox::No);
+	 int ret = msgBox.exec();
+	 
+	 if(ret ==QMessageBox::YesRole){
+	 	writefile=true;
+		}else{
+			writefile = false;
+		}
+	 
+	 
+	//cout << "Error...file """ << newfilepath.c_str() << """ exists" << endl;
+	} else{
+		//if the file doesn't exist
+		inp.clear(ios::failbit);
+		writefile=true;
+	}
+
+
+
+	
+	
 	//The system closes the currently loaded workspace (ALT 1).
 	vswork.clearExperimentManager();
 	
@@ -355,27 +462,28 @@ void MainWindowImpl::openWorkspace(){
         tr("VSeT (*.vst)")
         );
 
-
-//The user uses the file selection dialog to select the desired workspace (ALT 2) (ALT 3).
-if (pathToWS.isNull() == false){
-	  ifstream wsfile (pathToWS.toStdString().c_str());
-	  
-	   while (! wsfile.eof() )
-  {
-    wsfile.getline (buffer,100);
-    temp = buffer;
-    if(temp.length()>1){
-    vswork.add_experiment(buffer);	
-   	}
-    
-  }
-}
-
-//The system opens the workspace description file, displays the model visualization windows
-//in the state described in the workspace description file, and loads the model navigation
-//window with the names of models available for each of the experiments in the workspace.
-
 	
+	//The user uses the file selection dialog to select the desired workspace (ALT 2) (ALT 3).
+	if (pathToWS.isNull() == false){
+		//open the file with the path
+		  ifstream wsfile (pathToWS.toStdString().c_str());
+		  
+		   while (! wsfile.eof() )
+	  {
+	    wsfile.getline (buffer,100);
+	    temp = buffer;
+	    if(temp.length()>1){
+	    vswork.add_experiment(buffer);	
+	   	}
+	    
+	  }
+	}
+	
+	//The system opens the workspace description file, displays the model visualization windows
+	//in the state described in the workspace description file, and loads the model navigation
+	//window with the names of models available for each of the experiments in the workspace.
+	
+		
 }
  
 
