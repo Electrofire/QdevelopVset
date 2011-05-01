@@ -43,8 +43,7 @@ class Visualization
                 void render_model(Model* model);
                 void render_model(Model* model, QVTKWidget* modelWindow);
                 void create_snapshot(vtkRenderer *ren1, const char *image_name);
-        private:
-                void TkCheckAbort(vtkRenderWindow *renWin);
+
                 void setRenderWindow(Model* model);
                 void render_model();
 
@@ -52,6 +51,9 @@ class Visualization
                 string model_name;
                 vtkRenderer *ren1;
                 vtkRenderWindow *renWin;
+        private:
+                void TkCheckAbort(vtkRenderWindow *renWin);
+
 };
 
 #endif /* VISUALIZATION_H_ */
