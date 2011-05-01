@@ -9,12 +9,15 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <iostream>
+#include <QCheckBox>
+#include <QListWidget>
 /**
  * Experiment Manager handles the number of Experiments running
  * and adds or removes certain experiments from the list.
  * Should be used to pupulate the experiment manager widget on the
  * GUI.
  */
+
 class ExperimentManager{
 	
 public:
@@ -26,8 +29,11 @@ public:
     void print_list_of_experiments();
     vector<Experiment*> getList_of_experiments() const;
     void remove_experiment(int index);
-    void setTreeWidget(QTreeWidget *TreeWidget);
+    void setTreeWidget(QTreeWidget *TreeWidget, bool main);
     int searchExperiment(string name);
+    void initializeExperimentTree(Experiment* new_experiment);
+    void updateExperimentTree(Experiment* experiment);
+    string convertInt(int number);
     void clearTree();
 
     //Manage experiments
@@ -36,10 +42,10 @@ public:
     
     /* Attributes*/
     vector<Experiment*> list_of_experiments_;
-    QTreeWidget *treeWidget;
+    QTreeWidget* treeWidget;
+    QTreeWidget* treeWidgetA;
 	    
 private:
-    string convertInt(int number);
     
 
 };

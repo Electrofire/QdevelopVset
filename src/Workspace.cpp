@@ -69,15 +69,10 @@ vector<Visualization*> Workspace::getList_of_visualizations() const {
 
 //Add a new experiment to the workspace
 //The experiment will be added to the end of the list
-void Workspace::add_experiment(string expstring)
-{
-	//call experiment manager and pass it the string
-	expMan.add(expstring);	
-	//list_of_experiments_.push_back(new_experiment);
+void Workspace::add_experiment(string expstring){
+
+    return expMan.add(expstring);
 }
-
-
-
 
 //Add a new visualization to the workspace
 //The new visualization will be added to the end of the list
@@ -112,12 +107,22 @@ void Workspace::remove_visualization(Visualization* to_be_removed)
 }
 
 //Set Tree Widget Reference
-void Workspace::setTree(QTreeWidget *TreeWidget){
-	expMan.setTreeWidget(TreeWidget);
+void Workspace::setTree(QTreeWidget *TreeWidget, bool main){
+        expMan.setTreeWidget(TreeWidget, main);
+}
+
+Model* Workspace::getModel(QTreeWidgetItem *item){
+
+    string modelInfo = item->whatsThis(0).toStdString();
+    int next = modelInfo.rfind(" ");
+    string ExperimentName = modelInfo.substr(0, next);
+    string ModelName = modelInfo.substr(next+1, modelInfo.length());
+
+    return findModel(ExperimentName, ModelName);
 }
 
 //Search ModelPath in ExperimentName and return a model
-Model* Workspace::getModel(string experimentName, string ModelPath){
+Model* Workspace::findModel(string experimentName, string ModelPath){
 
     int exp = expMan.searchExperiment(experimentName);
     Experiment* experiment = expMan.getList_of_experiments()[exp];
@@ -125,6 +130,14 @@ Model* Workspace::getModel(string experimentName, string ModelPath){
     return experiment->getModels()[modeli];
 }
 
+void Workspace::updateExperimentsTree(){
+
+    vector<Experiment*> experiments = getList_of_experiments();
+    for(int i=0; i< experiments.size(); i++){
+        experiments[i]->parse_paths();
+        expMan.updateExperimentTree(experiments[i]);
+    }
+}
 
 /**
  *Cesar Chacon
@@ -148,44 +161,3 @@ void Workspace::clearExperimentManager(){
 	expMan.clearTree();
 	
 }
-/**
-int main()
-{
-	cout << "Running" << endl;
-
-	cout << "\nInitializing workspace" << endl;
-	Workspace my_workspace;
-
-	cout << "\nCreate some experiments" << endl;
-	Experiment e1 = Experiment("e1");
-	cout << "Created: " << e1.getprojectName() << endl;
-
-	Experiment e2 = Experiment("e2");
-	cout << "Created: " << e2.getprojectName() << endl;
-
-	Experiment e3 = Experiment("e3");
-	cout << "Created: " << e3.getprojectName() << endl;
-
-	cout << "\nAdding experiments to the workspace" << endl;
-	my_workspace.add_experiment(&e1);
-	my_workspace.add_experiment(&e2);
-	my_workspace.add_experiment(&e3);
-	cout << "Added" << endl;
-
-	cout << "List experiments in the workspace" << endl;
-	my_workspace.print_list_of_experiments();
-
-	cout << "\nRemove experiment at index 1" << endl;
-	my_workspace.remove_experiment(1);
-
-	cout << "List experiments in the workspace again to show the change" << endl;
-	my_workspace.print_list_of_experiments();
-
-	cout << "\nRemove experiment e1" << endl;
-	my_workspace.remove_experiment(&e1);
-
-	cout << "List experiments in the workspace again to show the change" << endl;
-	my_workspace.print_list_of_experiments();
-
-	cout << "\nComplete" << endl;
-}**/

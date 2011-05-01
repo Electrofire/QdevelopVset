@@ -14,7 +14,7 @@
 
 
 void loadXMLFromStart(string l, Workspace *vswork);
-//
+
 MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f) 
 	: QMainWindow(parent, f)
 {
@@ -46,22 +46,21 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
    connect(actionExit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
     //connect vel
-    connect(treeWidget, SIGNAL(itemDoubleClicked ( QTreeWidgetItem*, int ) ), this, SLOT(openModel(QTreeWidgetItem*, int)));
-
-    //vswork connect widgets to references
-    vswork.setTree(treeWidget);
+    connect(treeWidget, SIGNAL(itemDoubleClicked ( QTreeWidgetItem*, int ) ), this, SLOT(openModel(QTreeWidgetItem*)));
 
     //Initialize custom cursor pointers
     QBitmap zoomB("zoom.png");
-    QBitmap rotateB("rotate.png");
+    QBitmap rotateB("rotate.jpeg");
     QBitmap sliceB("slice.png");
-    QBitmap hourglass("hourglass.png");
     zoomCursor = QCursor(zoomB, -1, -1);
     rotateCursor = QCursor(rotateB, -1, -1);
     sliceCursor = QCursor(sliceB, -1, -1);
-    hourglassCursor = QCursor(hourglass, -1, -1);
+    win = new AnimatorWindow();
+    win->vwork = &vswork;
+    win->setTree();
+
     //Get any arguments passed from the command line
-  QStringList args =  QCoreApplication::arguments();
+    QStringList args =  QCoreApplication::arguments();
 	
 	if(args.size()>1){
 	  //get the second argument because the first one is the name of
@@ -70,9 +69,8 @@ MainWindowImpl::MainWindowImpl( QWidget * parent, Qt::WFlags f)
 	  if (path.length()>1){//do only if we have an argument than 1
 	  	loadXMLFromStart(path.toStdString(), &vswork);
 	 	}
-  	}
+        }
  }
-//
 
 //Opens the file dialog and
 //gets a string to the XML file
@@ -81,7 +79,7 @@ void MainWindowImpl::openSelect()
         //Open Select XML Dialog and filter the files
         //by extension
         QString pathToXML;
-       pathToXML = QFileDialog::getOpenFileName(
+        pathToXML = QFileDialog::getOpenFileName(
         this,
         "Select XML to load Experiment",
         "/",
@@ -89,14 +87,14 @@ void MainWindowImpl::openSelect()
         );
 
         //add experiment to the vector of experiments in the manager
+
  if ( pathToXML.isNull() == false )
     {
-    	setHourglassCursor();
+        doWait();
+        vswork.setTree(treeWidget, true);
         vswork.add_experiment(pathToXML.toStdString());
-		setDefaultCursor();
+        doWait();
     }
-       
-    
 }
 
 /**
@@ -166,6 +164,9 @@ void MainWindowImpl::setCurrentPointer(int nextAction){
     case Rotate:
         cursor = rotateCursor;
         break;
+    case Wait:
+        cursor = Qt::WaitCursor;
+        break;
     default:
         cursor = Qt::ArrowCursor;
     }
@@ -193,38 +194,26 @@ void MainWindowImpl::doRotate(){
     setCurrentPointer(Rotate);
 }
 
-/**
- * Function that sets the cursor to a
- * default wait cursor.
- */
-void MainWindowImpl::setHourglassCursor(){
-			setCursor(Qt::WaitCursor);  
-}
-/**
- * Function that sets the cursor to the
- * default arrow cursor.
- */
-void MainWindowImpl::setDefaultCursor(){
-	  setCursor(Qt::ArrowCursor);
+void MainWindowImpl::doWait(){
+    //Slicing calls here
+    setCurrentPointer(Wait);
 }
 
 void MainWindowImpl::OpenAnimatorWindow(){
 
-    AnimatorWindow * win = new AnimatorWindow();
-    win->show();
-    win->activateWindow();
+    if(!win->isVisible()){
+        win->show();
+        win->activateWindow();
+    }
+
+    else{
+        win->hide();
+    }
 }
 
+void MainWindowImpl::openModel(QTreeWidgetItem *item) {
 
-
-void MainWindowImpl::openModel(QTreeWidgetItem *item, int index) {
-
-  string modelInfo = item->whatsThis(0).toStdString();
-  int next = modelInfo.rfind(" ");
-  string ExperimentName = modelInfo.substr(0, next);
-  string ModelName = modelInfo.substr(next+1, modelInfo.length());
-
-  Model* model = vswork.getModel(ExperimentName, ModelName);
+  Model* model = vswork.getModel(item);
   Visualization* vis = new Visualization();
   vswork.add_visualization(vis);
   vis->render_model(model);
@@ -250,7 +239,7 @@ std::string MainWindowImpl::intToString(int i)
 
 void loadXMLFromStart(string pathXMLfromarg, Workspace *vswork){
 
-QString path = QString::fromStdString(pathXMLfromarg);
+ QString path = QString::fromStdString(pathXMLfromarg);
  QMessageBox msgBox;
  msgBox.setText(path);
  msgBox.setInformativeText("informative text");
@@ -258,7 +247,7 @@ QString path = QString::fromStdString(pathXMLfromarg);
  msgBox.setDefaultButton(QMessageBox::Cancel);
  int ret = msgBox.exec();
    
-   vswork->add_experiment(pathXMLfromarg);
+ vswork->add_experiment(pathXMLfromarg);
 	
 }
 
@@ -277,12 +266,36 @@ void MainWindowImpl::newWorkspace(){
 	ofstream out;
 	string newfilepath;
 	
+<<<<<<< HEAD
 		//Ask the user for a path and filename 
 		//to save the workspace to.
 	    QString Path = QFileDialog::getSaveFileName(this, "New file"  ,
 	     "/", tr("VSeT (*.vst)"));
 	    //Add the .vst string for the file name and path given
 	   newfilepath = Path.toStdString() + ".vst";
+=======
+QString msg = "The workspace already exists, do you want to overwrite it?";
+ QMessageBox msgBox;
+ msgBox.setText(msg);
+ msgBox.setIcon(QMessageBox::Warning);
+ msgBox.setInformativeText("Workspace Already Exists");
+ msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+ msgBox.setDefaultButton(QMessageBox::No);
+ int ret = msgBox.exec();
+ 
+ if(ret ==QMessageBox::YesRole){
+ 	writefile=true;
+}
+ else{
+        writefile = false;
+}
+//cout << "Error...file """ << newfilepath.c_str() << """ exists" << endl;
+} else{
+	//if the file doesn't exist
+	inp.clear(ios::failbit);
+	writefile=true;
+}
+>>>>>>> 15ea0dbf92a614c84db8f7f990916ea72e036416
 	
 	//try to open the file
 	inp.open(newfilepath.c_str(), ifstream::in);
@@ -334,6 +347,7 @@ void MainWindowImpl::newWorkspace(){
 		out.close();
 		}
 }
+
 /*
  * Cesar Chacon
  * unloads the existing workspace.

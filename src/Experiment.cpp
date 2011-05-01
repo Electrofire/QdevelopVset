@@ -41,6 +41,19 @@ Experiment::Experiment(string f) {
     xml_filename = f;
     read_xml();
     parse_paths();
+    root = new QTreeWidgetItem();
+    rootA = new QTreeWidgetItem();
+    covItem = new QTreeWidgetItem();
+    covItemA = new QTreeWidgetItem();
+    timeItem = new QTreeWidgetItem();
+    timeItemA = new QTreeWidgetItem();
+    duItem = new QTreeWidgetItem();
+    duItemA = new QTreeWidgetItem();
+    s1Item = new QTreeWidgetItem();
+    s1ItemA = new QTreeWidgetItem();
+    s2Item = new QTreeWidgetItem();
+    s2ItemA = new QTreeWidgetItem();
+
 }
 
 Experiment::~Experiment() {
@@ -94,13 +107,15 @@ void Experiment::set_shot_points(pugi::xml_node node) {
 }
 
 //Gets the paths to the model files, stores the model files into its respective vector
-void Experiment::parse_paths() {
+void Experiment::parse_paths() {    
+
     vector<string> coverage_files;
     vector<string> time_files;
     vector<string> velocity_files;
     vector<string> perturbation_files;
     vector<string> smoother1_files;
     vector<string> smoother2_files;
+    allFiles.erase(allFiles.begin(), allFiles.end());
 
     getdir(coverage_path(), coverage_files);
     getdir(time_path(), time_files);
@@ -110,13 +125,22 @@ void Experiment::parse_paths() {
     getdir(smoother2_path(), smoother2_files);
     //getdir(finalfiles_path(), finalfiles_files);
     
-    create_models(coverage_files, COVERAGE_MODEL);    
+    create_models(coverage_files, COVERAGE_MODEL);
     create_models(velocity_files, VELOCITY_MODEL);
     create_models(time_files, TIME_MODEL);
     create_models(perturbation_files, PERTURBATION_MODEL);
     create_models(smoother1_files, SMOOTHER1_MODEL);
     create_models(smoother2_files, SMOOTHER2_MODEL);
     //create_models(finalfiles_files, FINALFILES_MODEL);
+
+    updateModelPaths(coverage_files);
+    updateModelPaths(velocity_files);
+    updateModelPaths(time_files);
+    updateModelPaths(perturbation_files);
+    updateModelPaths(smoother1_files);
+    updateModelPaths(smoother2_files);
+
+    checkModifiedModels();
 
 }
 
@@ -165,7 +189,6 @@ int Experiment::getdir(string path, vector<string> &files) {
     }
     closedir(dp);
 
-
     return 0;
 }
 
@@ -174,6 +197,7 @@ int Experiment::getdir(string path, vector<string> &files) {
 void Experiment::create_models(vector<string> files, int model_type) {
     for(unsigned int i = 0; i < files.size(); i++) {
         Model *model;
+
         switch(model_type) {
             case COVERAGE_MODEL:
                 model = new CoverageModel(files.at(i), this);
@@ -194,33 +218,33 @@ void Experiment::create_models(vector<string> files, int model_type) {
                 model = new Model(files.at(i), this);
                 break;
         }
-        models.push_back(model);
+        if(searchModel(model->getPath()) == -1)
+            models.push_back(model);
     }
-
 }
 
-string Experiment::getprojectName() {
-    return project_name;
-}
+void Experiment::checkModifiedModels(){
 
-vector<Model*> Experiment::getModels(){
-    return models;
-   	
+    vector<Model*>::iterator iter = models.begin();
+    for(unsigned int j=0; j<models.size(); j++)
+        if(models[j]->needsDeleteAt(allFiles) == -1){
+            delete models[j]->pchild;
+            delete models[j]->pchildA;
+            models.erase(iter+j);
+        }
 }
 
 int Experiment::searchModel(string path){
 
-    for(int i=0; i< models.size(); i++){
+    for(unsigned int i=0; i< models.size(); i++)
         if(models[i]->getPath().compare(path)==0)
             return i;
-    }
+
     return -1; //error?
 }
 
-/**
- * Cesar Chacon
- * Return full project Path
- */
-string Experiment::getfullPath(){
-	return xml_filename;
+void Experiment::updateModelPaths(vector<string> files){
+
+    for(unsigned int i=0; i<files.size(); i++)
+        allFiles.push_back(files[i]);
 }

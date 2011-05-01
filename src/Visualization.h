@@ -39,11 +39,21 @@ class Visualization
                 //TO-DO
                 //Method to combine the Model and the
                 //visualization data and generate the image
+
                 void render_model(Model* model);
+                void render_model(Model* model, QVTKWidget* modelWindow);
                 void create_snapshot(vtkRenderer *ren1, const char *image_name);
+
+                void setRenderWindow(Model* model);
+                void render_model();
+
+                Model * model;
+                string model_name;
+                vtkRenderer *ren1;
+                vtkRenderWindow *renWin;
         private:
                 void TkCheckAbort(vtkRenderWindow *renWin);
-                Model * model;
+
 };
 
 #endif /* VISUALIZATION_H_ */

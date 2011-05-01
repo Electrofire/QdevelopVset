@@ -18,6 +18,7 @@ VelocityModel::~VelocityModel() {
 }
 //Places the binary file into the vector<float> floats
 int VelocityModel::read() {
+    string path = getPath();
     ifstream file(path.c_str(), ios::in|ios::binary);
     int float_length = sizeof(float);
     char buff[128];

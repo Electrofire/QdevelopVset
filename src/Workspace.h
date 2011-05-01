@@ -43,19 +43,28 @@ class Workspace
 		virtual ~Workspace();
 
 		//Accessors and mutators
+                ExperimentManager getExpMan(){return expMan;}
 		string getName() const;
+<<<<<<< HEAD
 		string getPath() const;
 		
 		void setName(string name_);
 		void setPath(string absolutePath);
 		void setTree(QTreeWidget *TreeWidget);
 		void clearExperimentManager();
+=======
+                void setName(string name_);
+                void setTree(QTreeWidget *TreeWidget, bool main);
+                void clearExperimentManager();
+>>>>>>> 15ea0dbf92a614c84db8f7f990916ea72e036416
 		vector<Visualization*> getList_of_visualizations() const;
 
 		//Experiment Methods
-		void add_experiment(string expstring);
+                void add_experiment(string expstring);
 		vector<Experiment*> getList_of_experiments() const;
-                Model* getModel(string experimentName, string ModelPath);
+                Model* getModel(QTreeWidgetItem *item);
+                Model* findModel(string experimentName, string ModelPath);
+                void updateExperimentsTree();
     
 		//Manage visualizations
 		void add_visualization(Visualization*);

@@ -24,7 +24,7 @@ public:
 	MainWindowImpl( QWidget * parent = 0, Qt::WFlags f = 0 );
 	Workspace vswork;//default workspace
 	QTreeWidgetItem *vel1Item;
-        enum buttonActions{OpenDialog, SaveDialog, OpenAnimatorDialog, Slice, Zoom, Pan, Rotate};
+        enum buttonActions{OpenDialog, SaveDialog, OpenAnimatorDialog, Slice, Zoom, Pan, Rotate, Wait};
 	void setCurrentPointer(int currentAction);
         void setBINfile(QString currentFile){binFile = currentFile;}//set the name of the bin file to save
         bool getBINfile(){return (binFile!= NULL);}//Check if the current project is saved
@@ -35,25 +35,25 @@ public:
         QCursor zoomCursor;
         QCursor rotateCursor;
         QCursor sliceCursor;
-        QCursor hourglassCursor;
+        AnimatorWindow * win;
 
 private:
-  std::string intToString(int i);
+        std::string intToString(int i);
         QString binFile;
 
 private slots:
 	void openSelect();
         void saveFile();
         void OpenAnimatorWindow();
-	//void refreshTreeItems();
-        void openModel(QTreeWidgetItem* item, int index);
+        void openModel(QTreeWidgetItem* item);
+
         void doSlice();
         void doZoom();
         void doPan();
         void doRotate();
+        void doWait();
+
         void keyPressEvent( QKeyEvent * event );
-        void setHourglassCursor();
-        void setDefaultCursor();
         void newWorkspace();
         void openWorkspace();
 	

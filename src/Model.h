@@ -13,6 +13,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 #include <QVTKWidget.h>
 #include <vtkSmartPointer.h>
 #include "vtkActor.h"
@@ -48,29 +50,28 @@ public:
     Model(string p, Experiment *exp);
     Model& operator=(const Model&) {};
     virtual ~Model();
-    int getStep();
-    int getIteration();
     string getPath(){return path;}
-    string getName();
+    int getStep(){return step;}
+    int getIteration(){return iteration;}
+    string getName(){return name;}
+    QTreeWidgetItem *pchild;
+    QTreeWidgetItem *pchildA;
+
+    int needsDeleteAt(vector<string> files);
     //void render();
     //virtual int draw() {};
     
-    int step;
-    int iteration;
-    string name;
+
 protected:
     Experiment *experiment;
    // virtual int read() {};
-    string path;
+
 private:
-    //void TkCheckAbort(vtkRenderWindow *renWin);
-    /**
-    void renderVel();
-    void renderTime();
-    void renderTimeWOVol();
-    void renderDusum();
-    void renderCoverage();
-    */
+
+    int step;
+    int iteration;
+    string name;
+    string path;
 };
 
 class PerturbationModel: public Model {
