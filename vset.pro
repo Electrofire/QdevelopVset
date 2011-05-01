@@ -1,4 +1,3 @@
-TEMPLATE = app
 TARGET =
 DEPENDPATH += . build src ui
 DESTDIR = bin
@@ -15,20 +14,27 @@ LIBS += -L./build/vtk/bin \
  -lvtkVolumeRendering \
  -lQVTK
 HEADERS += src/animatorwindow.h \
-<<<<<<< HEAD
- src/Experiment.h \
- src/ExperimentManager.h \
- src/mainwindowimpl.h \
- src/Model.h \
- src/pugiconfig.hpp \
- src/pugixml.hpp \
- src/RenderWindow.h \
- src/ShotPoint.h \
- src/Visualization.h \
- src/Workspace.h \
- src/modelwindow.h \
- src/Exception.h
-FORMS += ui/animatorwindow.ui ui/mainwindow.ui ui/modelwindow.ui
+src/Experiment.h \
+src/ExperimentManager.h \
+src/mainwindowimpl.h \
+src/Model.h \
+src/pugiconfig.hpp \
+src/pugixml.hpp \
+src/RenderWindow.h \
+src/ShotPoint.h \
+src/Visualization.h \
+src/Workspace.h \
+src/modelwindow.h \
+src/Exception.h \
+src/updateThread.h \
+src/syncgroupwindow.h 
+FORMS += ui/animatorwindow.ui \
+ ui/mainwindow.ui \
+ ui/modelwindow.ui \
+ ui/animatorwindow.ui \
+ ui/mainwindow.ui \
+ ui/modelwindow.ui \
+ ui/syncgroupwindow.ui
 SOURCES += src/animatorwindow.cpp \
  src/CoverageModel.cpp \
  src/Experiment.cpp \
@@ -45,40 +51,7 @@ SOURCES += src/animatorwindow.cpp \
  src/Visualization.cpp \
  src/Workspace.cpp \
  src/modelwindow.cpp \
- src/Exception.cpp
-=======
-           src/Experiment.h \
-           src/ExperimentManager.h \
-           src/mainwindowimpl.h \
-           src/Model.h \
-           src/pugiconfig.hpp \
-           src/pugixml.hpp \
-           src/RenderWindow.h \
-           src/ShotPoint.h \
-           src/Visualization.h \
-           src/Workspace.h \
-           src/modelwindow.h \
-    src/updateThread.h \
-    src/syncgroupwindow.h
-FORMS += ui/animatorwindow.ui ui/mainwindow.ui \
-         ui/modelwindow.ui \
-    ui/syncgroupwindow.ui
-SOURCES += src/animatorwindow.cpp \
-           src/CoverageModel.cpp \
-           src/Experiment.cpp \
-           src/ExperimentManager.cpp \
-           src/main.cpp \
-           src/mainwindowimpl.cpp \
-           src/Model.cpp \
-           src/PerturbationModel.cpp \
-           src/pugixml.cpp \
-           src/RenderWindow.cpp \
-           src/ShotPoint.cpp \
-           src/TimeModel.cpp \
-           src/VelocityModel.cpp \
-           src/Visualization.cpp \
-           src/Workspace.cpp \
-           src/modelwindow.cpp \
-    src/updateThread.cpp \
-    src/syncgroupwindow.cpp
->>>>>>> 15ea0dbf92a614c84db8f7f990916ea72e036416
+ src/Exception.cpp \
+ src/updateThread.cpp \
+ src/syncgroupwindow.cpp
+TEMPLATE = app
