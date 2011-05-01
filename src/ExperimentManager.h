@@ -9,6 +9,8 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <iostream>
+#include <QCheckBox>
+#include <QListWidget>
 /**
  * Experiment Manager handles the number of Experiments running
  * and adds or removes certain experiments from the list.

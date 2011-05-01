@@ -21,6 +21,7 @@
 #include "Model.h"
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include <QCheckBox>
 
 using namespace std;
 

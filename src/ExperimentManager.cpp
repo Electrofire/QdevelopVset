@@ -106,7 +106,7 @@ void ExperimentManager::initializeExperimentTree(Experiment* new_experiment){
     rootA = new QTreeWidgetItem(treeWidgetA);
     QString projectName = QString::fromStdString(new_experiment->getprojectName());
     root->setText(0, projectName);
-    rootA->setText(0, "1"+projectName);
+    rootA->setText(0, projectName);
 
     //subfolder items
     covItem = new QTreeWidgetItem(root);
@@ -154,6 +154,7 @@ void ExperimentManager::initializeExperimentTree(Experiment* new_experiment){
 void ExperimentManager::updateExperimentTree(Experiment* experiment){
 
     vector<Model*> models = experiment->getModels();
+    QFlags<Qt::ItemFlag> flg = Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled;
 
     unsigned int i;
     const char * name;
@@ -209,18 +210,20 @@ void ExperimentManager::updateExperimentTree(Experiment* experiment){
         if(pchild->text(0) == 0){
             pchild = new QTreeWidgetItem(pItem);
             pchildA = new QTreeWidgetItem(pItemA);
+            pchildA->setFlags(flg);
+            pchildA->setCheckState(0, Qt::Unchecked);
         }
 
         pchild->setText(0, QObject::tr(name));
-        pchildA->setText(0, QObject::tr(name));
+        pchildA->setText(1, QObject::tr(name));
         pchild->setWhatsThis(0, projectName + " " + QString::fromStdString(models[i]->getPath()));
         pchildA->setWhatsThis(0, projectName + " " + QString::fromStdString(models[i]->getPath()));
         iter = QString::fromStdString(convertInt(models[i]->getIteration()));
         pchild->setText(1, iter);
-        pchildA->setText(1, iter);
+        pchildA->setText(2, iter);
         stp = QString::fromStdString(convertInt(models[i]->getStep()));
         pchild->setText(2, stp);
-        pchildA->setText(2, stp);
+        pchildA->setText(3, stp);
 
         models[i]->pchild = pchild;
         models[i]->pchildA = pchildA;

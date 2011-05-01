@@ -6,9 +6,8 @@ AnimatorWindow::AnimatorWindow( QWidget * parent, Qt::WFlags f)
     setupUi(this);
     modelWidget->setColumnCount(3);
     QStringList header;//EP Header
-    header << "Name" << "Iteration" << "Step";
+    header << "" << "Name" << "Iteration" << "Step";
     modelWidget->setHeaderLabels(header);//assign headers
-    //vwork->setTree(modelWidget, false);
 }
 
 AnimatorWindow::~AnimatorWindow()
@@ -32,10 +31,8 @@ void AnimatorWindow::createCheckBoxes(){
         models = experiment->getModels();
         for(int j=0; j<models.size(); j++){
             model = models[i];
-            if(experiment->searchModel(model->getPath()) == -1){
-                model->pchildA->setFlags(model->pchildA->flags()|Qt::ItemIsUserCheckable);
-                model->pchildA->setCheckState(0, Qt::Checked);
-            }
+            model->pchildA->setCheckState(0, Qt::Checked);
+
         }
     }
 }
